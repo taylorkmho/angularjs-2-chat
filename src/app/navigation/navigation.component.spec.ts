@@ -6,15 +6,15 @@ import {
 
 import { TestComponentBuilder } from '@angular/compiler/testing';
 
-import { AboutComponent } from './about.component';
+import { NavigationComponent } from './navigation.component';
 
-describe('About Component', () => {
+describe('Navigation Component', () => {
   beforeEach(() => {
-    addProviders([]);
+    addProviders([NavigationComponent]);
   });
 
   it('should ...', async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-    tcb.createAsync(AboutComponent).then((fixture) => {
+    tcb.createAsync(NavigationComponent).then((fixture) => {
       fixture.detectChanges();
     });
   })));

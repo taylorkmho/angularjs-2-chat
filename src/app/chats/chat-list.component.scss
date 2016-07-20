@@ -1,0 +1,63 @@
+@import '../../style/theme';
+
+.chat-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  &__message {
+    border-bottom: $c-border solid 1px;
+    padding: $l-gutter;
+    font-size: .875rem;
+  }
+}
+
+.message {
+  display: flex;
+  justify-content: space-between;
+  &__component {
+    margin-right: $l-gutter;
+    p,
+    img {
+      display: block;
+    }
+    p {
+      margin: 0;
+    }
+    &--copy {
+      align-self: center;
+      flex-grow: 1;
+      min-width: 0;
+      p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      span {
+        // Adds "," or "&" based on order
+        &:after { content: ", "; margin-left: -3px; }
+        &:not(:first-of-type):last-of-type:before { content: " & "; }
+        &:last-of-type:after,
+        &:first-of-type:nth-last-of-type(2):after { content: ""; margin-left: 0; }
+      }
+    }
+    &--time {
+      margin-right: 0;
+      min-width: 70px;
+      text-align: right;
+    }
+  }
+}
+
+.author-avatar {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.recent-message {
+  color: $c-copy--light;
+}
+.recent-time {
+  font-size: .75rem;
+}

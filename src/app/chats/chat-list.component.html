@@ -1,0 +1,25 @@
+<ul class="chat-list">
+  <li class="chat-list__message message" *ngFor="let chat of chatList | keys">
+    <div class="message__component message__component--avatar">
+      <img class="author-avatar" src="//placehold.it/40x40" />
+    </div>
+    <div class="message__component message__component--copy">
+      <p class="author-name">
+        <span *ngFor="let userID of chat.userIDs">
+          Author #{{userID}}
+        </span>
+      </p>
+      <p class="recent-message">{{chat.messageThread[0].text}}</p>
+    </div>
+    <div class="message__component message__component--time">
+      <time class="recent-time">{{chat.messageThread[0].sentAt | amTimeAgo}}</time>
+    </div>
+  </li>
+</ul>
+
+<!-- TODO: USE LODASH TO FIND USER BASED ON ID#
+     METHINKS IT HAS TO DO WITH LOADING IT IN AS A PLUGIN VIA WEBPACK
+     A LÁ https://www.npmjs.com/package/lodash-webpack-plugin -->
+<!-- <div *ngIf="users">
+  <p>{{(users | keys)}}</p>
+</div> -->
