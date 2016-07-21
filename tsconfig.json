@@ -7,6 +7,45 @@
     "sourceMap": true,
     "noEmitHelpers": true
   },
+  "exclude": [
+    "node_modules"
+  ],
+  "filesGlob": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "!./node_modules/**"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  },
   "compileOnSave": false,
-  "buildOnSave": false
+  "buildOnSave": false,
+  "files": [
+    "./src/app/app.component.spec.ts",
+    "./src/app/app.component.ts",
+    "./src/app/app.routes.ts",
+    "./src/app/chats/chat-detail.component.spec.ts",
+    "./src/app/chats/chat-detail.component.ts",
+    "./src/app/chats/chat-list.component.spec.ts",
+    "./src/app/chats/chat-list.component.ts",
+    "./src/app/chats/chat-models.ts",
+    "./src/app/chats/chat.service.spec.ts",
+    "./src/app/chats/chat.service.ts",
+    "./src/app/chats/index.ts",
+    "./src/app/navigation/index.ts",
+    "./src/app/navigation/navigation.component.spec.ts",
+    "./src/app/navigation/navigation.component.ts",
+    "./src/app/shared/api.service.spec.ts",
+    "./src/app/shared/api.service.ts",
+    "./src/app/shared/index.ts",
+    "./src/main.ts",
+    "./src/polyfills.ts",
+    "./src/vendor.ts",
+    "./typings/globals/es6-shim/index.d.ts",
+    "./typings/globals/jasmine/index.d.ts",
+    "./typings/globals/moment-node/index.d.ts",
+    "./typings/globals/moment/index.d.ts",
+    "./typings/globals/node/index.d.ts",
+    "./typings/index.d.ts"
+  ]
 }
