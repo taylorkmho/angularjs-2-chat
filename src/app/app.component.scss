@@ -1,27 +1,37 @@
+@import '../style/theme';
 // styles applied on :host are applied on the current component, "app" in this case
 :host {
   display: block;
+  max-width: $l-max-width;
+  margin: 0 auto;
 }
 
 header {
   background-color: #fff;
-  padding: 16px;
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  height: 60px;
   width: 100%;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+  max-width: $l-max-width;
+  align-items: center;
+  justify-content: center;
+  background-image: radial-gradient(circle at 50% 200%,#6D6E88,#313148 100%);
+  color: #fff;
+  h1 {
+    font-size: .85rem;
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+  }
 }
+
 
 main {
-  padding: 1em;
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-  margin-top: 50px;
   display: block;
-}
-
-footer {
-  text-align: center;
-  font-size: 0.8em;
+  margin-top: 60px;
+  min-height: calc(100vh - 60px);
+  background-color: #fff;
 }

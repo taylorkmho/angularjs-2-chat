@@ -20,17 +20,16 @@
     img {
       display: block;
     }
-    p {
-      margin: 0;
-    }
     &--copy {
       align-self: center;
       flex-grow: 1;
       min-width: 0;
       p {
+        margin: 0;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        line-height: 1.25;
       }
       span {
         // Adds "," or "&" based on order
@@ -60,4 +59,5 @@
 }
 .recent-time {
   font-size: .75rem;
+  color: $c-copy--light;
 }
