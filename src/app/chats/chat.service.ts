@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ChatService {
-  private url = '/data/chat-data.json';
+  private url = 'http://localhost:8080/api/chat-data.json';
+  constructor(private http: Http) {}
 
-  constructor(private http: Http) { }
-
-    getChatLists() {
-      return this.http.get(this.url)
-        .map( response => response.json().data.chatThreads );
-    }
-    getUsers() {
-      return this.http.get(this.url)
-        .map( response => response.json().data.users );
-    }
+  getChatLists(): Observable<any> {
+    return this.http.get(this.url)
+      .map( response => {
+        return response.json().data.chatThreads;
+      });
+  }
+  getUsers(): Observable<any> {
+    return this.http.get(this.url)
+      .map( response => {
+        return response.json().data.users;
+      });
+  }
 
 }
