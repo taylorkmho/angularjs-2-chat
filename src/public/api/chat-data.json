@@ -3,43 +3,35 @@
     "users": [
       {
         "id": 1,
-        "name": "Kyle Wells",
-        "avatarSrc": "//placehold.it/50x50/bada55/111"
+        "name": "Kyle Wells"
       },
       {
         "id": 2,
-        "name": "Nathan Griffin",
-        "avatarSrc": "//placehold.it/50x50/bada55/111"
+        "name": "Susan Kelley"
       },
       {
         "id": 3,
-        "name": "Susan Kelley",
-        "avatarSrc": "//placehold.it/50x50/bada55/111"
+        "name": "Nathan Griffin"
       },
       {
         "id": 4,
-        "name": "Michael Stanley",
-        "avatarSrc": "//placehold.it/50x50/bada55/111"
+        "name": "Catherine Stevens"
       },
       {
         "id": 5,
-        "name": "Catherine Stevens",
-        "avatarSrc": "//placehold.it/50x50/bada55/111"
+        "name": "Michael Stanley"
       },
       {
         "id": 6,
-        "name": "Alan Soto",
-        "avatarSrc": "//placehold.it/50x50/bada55/111"
+        "name": "Amanda Fields"
       },
       {
         "id": 7,
-        "name": "Ethan Hudson",
-        "avatarSrc": "//placehold.it/50x50/bada55/111"
+        "name": "Alan Soto"
       },
       {
         "id": 8,
-        "name": "Susan Gomez",
-        "avatarSrc": "//placehold.it/50x50/bada55/111"
+        "name": "Susan Gomez"
       }
     ],
     "chatThreads": [

@@ -1,20 +1,21 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { Router, ActivatedRoute }       from '@angular/router';
-import { TimeAgoPipe, DateFormatPipe }  from 'angular2-moment';
-import { ReversePipe, HandleError }     from '../shared';
-import { ChatService }                  from './chat.service';
+import { Router, ActivatedRoute }                              from '@angular/router';
+import { TimeAgoPipe, DateFormatPipe }                         from 'angular2-moment';
+import { KeysPipe, ReversePipe, HandleError }                  from '../shared';
+import { ChatService }                                         from './chat.service';
 
 
 @Component({
   selector: 'my-chat-detail',
   templateUrl: './chat-detail.component.html',
   styleUrls: ['./chat-detail.component.scss'],
-  pipes: [ReversePipe, TimeAgoPipe, DateFormatPipe]
+  pipes: [ReversePipe, TimeAgoPipe, DateFormatPipe, KeysPipe]
 })
 
 export class ChatDetailComponent implements OnInit, OnDestroy {
   private sub: any;
   private chatDetail: any;
+  private users: any;
   @ViewChild('scrollMe') myScrollContainer: ElementRef;
 
   constructor(
@@ -26,12 +27,16 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       let id = +params['id']; // (+) converts string 'id' to a number
       this.service.getChatDetail(id).subscribe(
-          chatDetail => {
-            this.chatDetail = chatDetail;
-            this.scrollToBottom();
-          },
-          error => HandleError(error)
-        );
+        chatDetail => {
+          this.chatDetail = chatDetail;
+          this.scrollToBottom();
+        },
+        error => HandleError(error)
+      );
+      this.service.getUsers().subscribe(
+        users => {this.users = users; console.log(this.users);},
+        error => HandleError(error)
+      )
     });
   }
 

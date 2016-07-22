@@ -17,12 +17,44 @@
     margin: 0;
     padding: $l-gutter;
     list-style: none;
-    li {
-      display: block;
-    }
   }
   &__form {
     padding: $l-gutter;
     border-top: 2px solid $c-border;
+  }
+}
+
+.message {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: $l-gutter;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  main {
+    max-width: calc(100% - 16px*2 - 38px);
+  }
+  aside {
+    width: 38px;
+    height: 38px;
+    margin-right: $l-gutter;
+    margin-bottom: 18px;
+    background-size: cover;
+    background-position: center center;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+  &__text {
+    display: inline-block;
+    margin: 0;
+    padding: ($l-gutter/2);
+    border: 2px solid $c-border;
+    border-radius: 6px;
+  }
+  &__name,
+  &__time {
+    color: $c-copy--light;
+    font-size: .75rem;
+    font-weight: 300;
   }
 }
