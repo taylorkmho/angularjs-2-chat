@@ -14,7 +14,6 @@
     </li>
   </ul>
   <div class="chat-detail__form">
-    <input type="text" placeholder="Write a message" />
-    <input type="submit" value="SEND" />
+    <my-chat-detail-form (onSubmit)="addTextMessage($event)"></my-chat-detail-form>
   </div>
 </div>

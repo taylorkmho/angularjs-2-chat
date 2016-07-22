@@ -1,0 +1,4 @@
+<form (ngSubmit)="addTextMessage(textMessage)" #chatForm="ngForm">
+  <input #text [(ngModel)]="textMessage" name="text" (keyup)="textMessage=text.value" type="text" placeholder="Write a message" />
+  <input type="submit" value="SEND" />
+</form>

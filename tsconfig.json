@@ -24,6 +24,7 @@
     "./src/app/app.component.spec.ts",
     "./src/app/app.component.ts",
     "./src/app/app.routes.ts",
+    "./src/app/chats/chat-detail-form.component.ts",
     "./src/app/chats/chat-detail.component.spec.ts",
     "./src/app/chats/chat-detail.component.ts",
     "./src/app/chats/chat-list.component.spec.ts",

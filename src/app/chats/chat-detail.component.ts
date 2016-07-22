@@ -4,11 +4,13 @@ import { TimeAgoPipe, DateFormatPipe }                         from 'angular2-mo
 import { KeysPipe, ReversePipe, HandleError }                  from '../shared';
 import { ChatService }                                         from './chat.service';
 
+import { ChatDetailFormComponent }                             from './chat-detail-form.component';
 
 @Component({
   selector: 'my-chat-detail',
   templateUrl: './chat-detail.component.html',
   styleUrls: ['./chat-detail.component.scss'],
+  directives: [ChatDetailFormComponent],
   pipes: [ReversePipe, TimeAgoPipe, DateFormatPipe, KeysPipe]
 })
 
@@ -24,8 +26,11 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
     private service: ChatService) {}
 
   ngOnInit() {
+    // Pulls in Chat Detail ID based on URL
     this.sub = this.route.params.subscribe(params => {
-      let id = +params['id']; // (+) converts string 'id' to a number
+      let id = +params['id'];
+      // Observes chat detail data via service,
+      // updates `this.chatDetail` on success
       this.service.getChatDetail(id).subscribe(
         chatDetail => {
           this.chatDetail = chatDetail;
@@ -33,6 +38,8 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
         },
         error => HandleError(error)
       );
+      // Observes user data via service,
+      // updates `this.users` on success
       this.service.getUsers().subscribe(
         users => this.users = users,
         error => HandleError(error)
@@ -42,6 +49,10 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  addTextMessage(content) {
+    console.log('ChatDetailComponent addTextMessage() 🔥 w/ `' + content + '`');
   }
 
   scrollToBottom(): void {

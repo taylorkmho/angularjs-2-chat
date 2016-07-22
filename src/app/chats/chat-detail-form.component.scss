@@ -1,0 +1,43 @@
+@import '../../style/theme';
+
+:host {
+  display: block;
+  padding: $l-gutter;
+  border-top: 2px solid $c-ui-elements;
+}
+
+form {
+  display: flex;
+  width: 100%;
+}
+
+input {
+  border: none;
+  outline: none;
+  webkit-appearance: none;
+  border-radius: 4px;
+  transition: all ease-out 150ms;
+}
+
+input[type="text"] {
+  flex-grow: 1;
+  background: $c-ui-elements;
+  border: 2px solid transparent;
+  margin-right: $l-gutter;
+  padding: ($l-gutter/2);
+  &:focus {
+    border: 2px solid $c-primary;
+  }
+}
+
+input[type="submit"] {
+  background: #fff;
+  color: $c-copy--light;
+  &:hover,
+  &:focus {
+    background-color: darken(#fff, 5%);
+  }
+  &:active {
+    background-color: darken(#fff, 7.5%);
+  }
+}
