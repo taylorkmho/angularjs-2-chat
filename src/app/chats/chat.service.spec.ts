@@ -1,47 +1,44 @@
 import { provide } from '@angular/core';
-import {
-  describe,
-  expect,
-  beforeEach,
-  it,
-  inject,
-  beforeEachProviders
-} from '@angular/core/testing';
-import {Headers, HTTP_PROVIDERS, BaseRequestOptions, XHRBackend, Response} from '@angular/http';
-import { MockBackend, MockConnection } from '@angular/http/testing';
-import { TestComponentBuilder } from '@angular/compiler/testing';
+import { describe, expect, beforeEach, it, inject, addProviders } from '@angular/core/testing';
+import { HTTP_PROVIDERS, XHRBackend } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
+
 import { ChatService } from './chat.service';
 
 describe('Chat Service', () => {
-  let service, mockBackend;
 
-  beforeEachProviders(() => [
-    HTTP_PROVIDERS,
-    provide(XHRBackend, {useClass: MockBackend}),
-    ChatService
-  ]);
-
-  beforeEach(inject([ChatService, XHRBackend], (s, xhr) => {
-    service = s;
-    mockBackend = xhr;
-  }));
-
-  it('should refer to a json file', ()=>{
-    expect(service.url).toContain('json');
-  })
-
-  it('.getChatLists() should return chatThreads', () => {
-    let chatThreads;
-    service.getChatLists().subscribe((data) => {
-      chatThreads = data['chatThreads'];
-      expect(chatThreads).toBeDefined();
-    });
+  beforeEach(() => {
+    addProviders([
+      HTTP_PROVIDERS,
+      provide(XHRBackend, {useClass: MockBackend}),
+      ChatService
+    ]);
   });
 
-  it('.getUsers() should return users', () => {
+  it('should refer to a json file', inject([ChatService],(service)=>{
+    expect(service.url).toContain('json');
+  }))
+
+  it('.getChatLists() should return (multiple) chatThreads', inject([ChatService], (service) => {
+     return service.getChatLists().subscribe(data => {
+       let chatThreads = data['chatThreads'];
+       expect(chatThreads).toBeDefined();
+       expect(chatThreads.length).toBeGreaterThan(1);
+     });
+   }));
+
+  it('.getChatDetail() should return a single chatThread', inject([ChatService], (service) => {
+    service.getChatDetail().subscribe((data) => {
+      let chatThread = data;
+      expect(chatThread).toBeDefined();
+      expect(chatThread.length).toBe(1);
+    });
+  }));
+
+  it('.getUsers() should return users', inject([ChatService], (service) => {
     service.getUsers().subscribe(data => {
       expect(data['users']).toBeDefined();
     });
-  });
+  }));
 
 });
