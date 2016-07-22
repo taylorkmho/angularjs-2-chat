@@ -1,0 +1,28 @@
+@import '../../style/theme';
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.chat-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  &__thread {
+    flex-grow: 1;
+    max-height: calc(100% - 58px);
+    overflow: scroll;
+    margin: 0;
+    padding: $l-gutter;
+    list-style: none;
+    li {
+      display: block;
+    }
+  }
+  &__form {
+    padding: $l-gutter;
+    border-top: 2px solid $c-border;
+  }
+}

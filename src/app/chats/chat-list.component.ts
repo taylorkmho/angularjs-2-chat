@@ -25,6 +25,9 @@ export class ChatListComponent implements OnInit {
         error => HandleError(error),
         () => console.log('getChatLists succeeded')
       );
+
+  onSelect(chatDetail) {
+    this.router.navigate(['/chat-list', chatDetail.id]);
   }
 
 }

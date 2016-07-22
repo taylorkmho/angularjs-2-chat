@@ -31,7 +31,7 @@ export class Message {
   }
 }
 
-export class ChatThread {
+export class ChatDetail {
   id: number;
   userIDs: Array<number>;
   messageThread: any;

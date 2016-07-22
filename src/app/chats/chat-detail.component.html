@@ -1,0 +1,13 @@
+<div *ngIf="chatDetail" class="chat-detail">
+  <ul #scrollMe class="chat-detail__thread">
+    <li *ngFor="let message of chatDetail.messageThread | reverse">
+      <img src="//placehold.it/100x100" />
+      <p>{{message.text}}</p>
+      <!-- <time class="recent-time">{{message.sentAt}}</time> -->
+    </li>
+  </ul>
+  <div class="chat-detail__form">
+    <input type="text" placeholder="Write a message" />
+    <input type="submit" value="SEND" />
+  </div>
+</div>
