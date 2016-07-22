@@ -1,21 +1,16 @@
 <div *ngIf="chatDetail" class="chat-detail">
   <ul #scrollMe class="chat-detail__thread">
-    <li class="message" *ngFor="let message of chatDetail.messageThread | reverse; let messageIndex = index">
+    <li class="message" *ngFor="let message of chatDetail.messageThread | myReverse; let messageIndex = index">
       <aside class="message__avatar" [ngStyle]="{'background-image': 'url(/img/avatar/' + message.authorID + '.jpg)'}"></aside>
       <main>
         <p class="message__text">{{message.text}}</p>
-        <div *ngFor="let entry of users | keys">
+        <div *ngFor="let entry of users | myKeys">
           <div *ngIf="message.authorID === entry.value.id">
             <span class="message__name">{{entry.value.name}}</span>
             <span class="message__time">{{message.sentAt | amDateFormat:'M/D h:mmA'}}</span>
           </div>
         </div>
       </main>
-      <!-- <div *ngFor="let user of users; let userIndex = index">
-        <p *ngIf="messageIndex === userIndex">{{user.name}}</p>
-      </div> -->
-      <!-- <p *ngFor="let user of items; let i = index">...</p>
-         <time class="recent-time">{{message.sentAt}}</time> -->
     </li>
   </ul>
   <div class="chat-detail__form">

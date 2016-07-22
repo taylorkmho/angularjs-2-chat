@@ -34,9 +34,9 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
         error => HandleError(error)
       );
       this.service.getUsers().subscribe(
-        users => {this.users = users; console.log(this.users);},
+        users => this.users = users,
         error => HandleError(error)
-      )
+      );
     });
   }
 
@@ -48,9 +48,9 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
     try {
       setTimeout( () => {
         this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-      }, 250)
-    } catch(err) {
-      console.log(err);
+      }, 250);
+    } catch (err) {
+      HandleError(err);
     }
   }
 

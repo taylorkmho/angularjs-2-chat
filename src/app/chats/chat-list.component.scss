@@ -5,7 +5,7 @@
   margin: 0;
   list-style: none;
   &__message {
-    border-bottom: $c-border solid 1px;
+    border-bottom: $c-ui-elements solid 1px;
     padding: $l-gutter;
     font-size: .875rem;
   }
@@ -55,9 +55,9 @@
 }
 
 .recent-message {
-  color: $c-copy--lighter;
+  color: $c-copy--light;
 }
 .recent-time {
   font-size: .75rem;
-  color: $c-copy--lighter;
+  color: $c-copy--light;
 }
