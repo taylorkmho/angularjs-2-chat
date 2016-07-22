@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Pipe, PipeTransform } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ApiService {
   title = 'Angular 2';
 }
 
-@Pipe({name: 'keys'})
-export class KeysPipe implements PipeTransform {
-  transform(value, args: string[]): any {
-    let keys = [];
-    for (let key in value) {
-      keys.push(value[key]);
-    }
-    return keys;
+export function HandleError (error: any) {
+  let errMsg = (error.message) ? error.message :
+    error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+  console.error(errMsg);
+  if (Observable) {
+    return Observable.throw(errMsg);
   }
 }

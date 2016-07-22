@@ -1,5 +1,5 @@
 <ul class="chat-list">
-  <li class="chat-list__message message" *ngFor="let chat of chatList | keys">
+  <li *ngFor="let chat of chatList" (click)="onSelect(chat)" class="chat-list__message message">
     <div class="message__component message__component--avatar">
       <img class="author-avatar" src="//placehold.it/40x40" />
     </div>
