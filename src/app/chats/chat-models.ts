@@ -14,14 +14,17 @@ export class User {
 export class ChatDetail {
   id: string;
   userIDs: Array<string>;
+  lastUpdated: string;
   messageThread: any;
   constructor(
     id?: string,
     userIDs?: Array<string>,
+    lastUpdated?: any,
     messageThread?: any
   ) {
     this.id = id;
     this.userIDs = userIDs;
+    this.lastUpdated = lastUpdated;
     this.messageThread = messageThread;
   }
 }

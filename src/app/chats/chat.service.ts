@@ -13,7 +13,7 @@ export class ChatService {
   constructor(private http: Http) {}
 
   getChatLists(): Observable<any> {
-    return this.http.get(this.apiChatList)
+    return this.http.get(this.apiChatList + '?sortBy=lastUpdated&order=desc')
       .map( response => response.json() as ChatDetail[] );
   }
 
@@ -41,6 +41,7 @@ export class ChatService {
     } else if (type === 'image') {
     }
     chatDetail.messageThread.unshift(newMessage);
+    chatDetail.lastUpdated = moment();
 
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
