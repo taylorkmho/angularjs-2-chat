@@ -1,18 +1,5 @@
 <ul class="chat-list">
-  <li *ngFor="let chat of chatList" (click)="onSelect(chat)" class="chat-list__message message">
-    <div class="message__component message__component--avatar">
-      <img class="author-avatar" src="//placehold.it/40x40" />
-    </div>
-    <div class="message__component message__component--copy">
-      <p class="author-name">
-        <span *ngFor="let userID of chat.userIDs">
-          Author #{{userID}}
-        </span>
-      </p>
-      <p class="recent-message">{{chat.messageThread[0].text}}</p>
-    </div>
-    <div class="message__component message__component--time">
-      <time class="recent-time">{{chat.messageThread[0].sentAt | amTimeAgo}}</time>
-    </div>
+  <li *ngFor="let chatDetail of chatList" (click)="onSelect(chatDetail)" class="chat-list__message">
+    <my-chat-preview [chatDetail]="chatDetail"></my-chat-preview>
   </li>
 </ul>

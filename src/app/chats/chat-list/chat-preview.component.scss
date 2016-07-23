@@ -1,0 +1,85 @@
+@import '../../../style/theme';
+
+:host {
+  display: flex;
+  justify-content: space-between;
+  transition: background 150ms ease-out;
+  padding: $l-gutter;
+  font-size: .875rem;
+  cursor: pointer;
+  &:hover {
+    background-color: darken($c-app-bg, 1%);
+  }
+}
+
+.component {
+  position: relative;
+  &--avatar {
+    min-height: $m-avatar-size;
+    min-width: $m-avatar-size;
+    margin-right: $l-gutter;
+  }
+  &--copy {
+    align-self: center;
+    flex-grow: 1;
+    min-width: 0;
+  }
+  &--time {
+    margin-right: 0;
+    min-width: 70px;
+    text-align: right;
+  }
+}
+
+.author-avatar {
+  width: $m-avatar-size;
+  height: $m-avatar-size;
+  overflow: hidden;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center center;
+  background-color: $c-ui-elements;
+  // selected if there are two elements
+  &:nth-child(1):nth-last-child(2),
+  &:nth-child(2):nth-last-child(1) {
+    position: absolute;
+    width: ($m-avatar-size * .75);
+    height: ($m-avatar-size * .75);
+  }
+  &:nth-child(1):nth-last-child(2) {
+    top: 0;
+    left: 0;
+  }
+  &:nth-child(2):nth-last-child(1) {
+    bottom: 0;
+    right: 0;
+    box-shadow: -2px -2px 2px 0 rgba(#000, .125);
+  }
+}
+
+.author-name,
+.recent-message {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+.author-name {
+  span {
+    // Adds "," or "&" based on order
+    &:after { content: ", "; }
+    &:not(:first-of-type):last-of-type:before { content: " & "; }
+    &:last-of-type:after,
+    &:first-of-type:nth-last-of-type(2):after { content: ""; }
+  }
+}
+
+.recent-message {
+  color: $c-copy--light;
+}
+.recent-time {
+  font-size: .75rem;
+  color: $c-copy--light;
+}

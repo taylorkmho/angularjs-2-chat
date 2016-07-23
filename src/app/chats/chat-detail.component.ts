@@ -5,13 +5,13 @@ import { TimeAgoPipe, DateFormatPipe } from 'angular2-moment';
 import { KeysPipe, ReversePipe, HandleError } from '../shared';
 import { ChatDetail } from './chat-models';
 import { ChatService } from './chat.service';
-import { ChatDetailFormComponent } from './chat-detail-form.component';
+import { ChatFormComponent } from './chat-detail/chat-form.component';
 
 @Component({
   selector: 'my-chat-detail',
   templateUrl: './chat-detail.component.html',
   styleUrls: ['./chat-detail.component.scss'],
-  directives: [ChatDetailFormComponent],
+  directives: [ChatFormComponent],
   pipes: [ReversePipe, TimeAgoPipe, DateFormatPipe, KeysPipe]
 })
 

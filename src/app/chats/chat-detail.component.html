@@ -7,8 +7,9 @@
           <p class="message__text">{{message.text}}</p>
           <figcaption>
             <div class="message__name">
-              <div *ngFor="let entry of users | myKeys">
-                <span *ngIf="message.authorID === entry.value.id">{{entry.value.name}}</span>
+              <!-- TODO: prevent extra div's from being produced -->
+              <div *ngFor="let user of users | myKeys">
+                <span *ngIf="message.authorID === user.value.id">{{user.value.name}}</span>
               </div>
             </div>
             <span class="message__time">{{message.sentAt | amDateFormat:'M/D h:mmA'}}</span>
@@ -18,6 +19,6 @@
     </li>
   </ul>
   <div class="chat-detail__form">
-    <my-chat-detail-form [chatDetail]="chatDetail" (onMessageSent)="fetchData($event)"></my-chat-detail-form>
+    <my-chat-form [chatDetail]="chatDetail" (onMessageSent)="fetchData($event)"></my-chat-form>
   </div>
 </div>

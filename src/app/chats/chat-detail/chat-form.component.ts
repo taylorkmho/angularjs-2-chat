@@ -3,18 +3,18 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, EventEmitter,
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TimeAgoPipe, DateFormatPipe } from 'angular2-moment';
-import { KeysPipe, ReversePipe, HandleError } from '../shared';
-import { ChatDetail } from './chat-models';
-import { ChatService } from './chat.service';
+import { KeysPipe, ReversePipe, HandleError } from '../../shared';
+import { ChatDetail } from './../chat-models';
+import { ChatService } from './../chat.service';
 
 @Component({
-  selector: 'my-chat-detail-form',
-  templateUrl: './chat-detail-form.component.html',
-  styleUrls: ['./chat-detail-form.component.scss'],
+  selector: 'my-chat-form',
+  templateUrl: './chat-form.component.html',
+  styleUrls: ['./chat-form.component.scss'],
   pipes: [ReversePipe, TimeAgoPipe, DateFormatPipe, KeysPipe]
 })
 
-export class ChatDetailFormComponent implements OnInit, OnDestroy {
+export class ChatFormComponent implements OnInit, OnDestroy {
   @ViewChild('text') myTextInput: ElementRef;
   @Input('chatDetail') chatDetail: ChatDetail[];
   @Output() onMessageSent = new EventEmitter<boolean>();

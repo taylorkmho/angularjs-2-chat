@@ -1,0 +1,12 @@
+<div class="component component--avatar">
+  <div class="author-avatar" *ngFor="let userID of chatDetail.userIDs | slice:0:2" [ngStyle]="{'background-image': 'url(/img/avatar/' + userID + '.jpg)'}"></div>
+</div>
+<div class="component component--copy">
+  <div class="author-name">
+    <span *ngFor="let name of authorNames">{{name}}</span>
+  </div>
+  <p class="recent-message">{{message}}</p>
+</div>
+<div class="component component--time">
+  <time class="recent-time">{{timeAgo | amTimeAgo}}</time>
+</div>
