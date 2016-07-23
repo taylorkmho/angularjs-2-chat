@@ -16,7 +16,7 @@ import { ChatDetailFormComponent } from './chat-detail-form.component';
 })
 
 export class ChatDetailComponent implements OnInit, OnDestroy {
-  private chatDetail: any;
+  private chatDetail: ChatDetail[];
   private chatID: string;
   private sub: any;
 
@@ -43,12 +43,11 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // TODO: (❕) Unsubscribe from all subscriptions on destroy
+    //            also apply to chatListComponent subs
   }
 
   // TODO: (❕) connect to socket.io for chat data
   fetchData() {
-    /* Observes chat detail data via service,
-       updates `this.chatDetail` on success */
     this.service.getChatDetail(this.chatID)
       .subscribe(
         chatDetail => {
@@ -57,13 +56,10 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
         },
         error => HandleError(error)
       );
-    /*  Observes user data via service,
-        updates `this.users` on success */
+
     this.service.getUsers()
       .subscribe(
-        users => {
-          this.users = users;
-        },
+        users => this.users = users,
         error => HandleError(error)
       );
   }

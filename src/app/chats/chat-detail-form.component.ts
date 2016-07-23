@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TimeAgoPipe, DateFormatPipe } from 'angular2-moment';
 import { KeysPipe, ReversePipe, HandleError } from '../shared';
+import { ChatDetail } from './chat-models';
 import { ChatService } from './chat.service';
 
 @Component({
@@ -15,7 +16,7 @@ import { ChatService } from './chat.service';
 
 export class ChatDetailFormComponent implements OnInit, OnDestroy {
   @ViewChild('text') myTextInput: ElementRef;
-  @Input('chatDetail') chatDetail: any;
+  @Input('chatDetail') chatDetail: ChatDetail[];
   @Output() onMessageSent = new EventEmitter<boolean>();
   private textMessage = '';
 

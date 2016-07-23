@@ -10,6 +10,7 @@ export class User {
   }
 }
 
+// TODO: Add unread flag
 export class ChatDetail {
   id: string;
   userIDs: Array<string>;
