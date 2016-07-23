@@ -1,43 +1,22 @@
 export class User {
-  id: number;
+  id: string;
   name: string;
-  avatarSrc: string;
   constructor(
-    id?: number,
-    name?: string,
-    avatarSrc?: string
+    id?: string,
+    name?: string
   ) {
     this.id = id;
     this.name = name;
-    this.avatarSrc = avatarSrc;
-  }
-}
-
-export class Message {
-  id: number;
-  authorID: number;
-  text: string;
-  sentAt: string;
-  constructor(
-    id?: number,
-    authorID?: number,
-    text?: string,
-    sentAt?: string
-  ) {
-    this.id = id;
-    this.authorID = id;
-    this.text = text;
-    this.sentAt = sentAt;
   }
 }
 
 export class ChatDetail {
-  id: number;
-  userIDs: Array<number>;
+  id: string;
+  userIDs: Array<string>;
   messageThread: any;
   constructor(
-    id?: number,
-    userIDs?: Array<number>,
+    id?: string,
+    userIDs?: Array<string>,
     messageThread?: any
   ) {
     this.id = id;

@@ -1,19 +1,23 @@
 <div *ngIf="chatDetail" class="chat-detail">
   <ul #scrollMe class="chat-detail__thread">
-    <li class="message" *ngFor="let message of chatDetail.messageThread | myReverse; let messageIndex = index">
+    <li class="message" *ngFor="let message of chatDetail.messageThread | myReverse; let messageIndex = index" [class.message--right]="message.authorID === '0'">
       <aside class="message__avatar" [ngStyle]="{'background-image': 'url(/img/avatar/' + message.authorID + '.jpg)'}"></aside>
       <main>
-        <p class="message__text">{{message.text}}</p>
-        <div *ngFor="let entry of users | myKeys">
-          <div *ngIf="message.authorID === entry.value.id">
-            <span class="message__name">{{entry.value.name}}</span>
+        <figure>
+          <p class="message__text">{{message.text}}</p>
+          <figcaption>
+            <div class="message__name">
+              <div *ngFor="let entry of users | myKeys">
+                <span *ngIf="message.authorID === entry.value.id">{{entry.value.name}}</span>
+              </div>
+            </div>
             <span class="message__time">{{message.sentAt | amDateFormat:'M/D h:mmA'}}</span>
-          </div>
-        </div>
+          </figcaption>
+        </figure>
       </main>
     </li>
   </ul>
   <div class="chat-detail__form">
-    <my-chat-detail-form (onSubmit)="addTextMessage($event)"></my-chat-detail-form>
+    <my-chat-detail-form [chatDetail]="chatDetail" (onMessageSent)="fetchData($event)"></my-chat-detail-form>
   </div>
 </div>

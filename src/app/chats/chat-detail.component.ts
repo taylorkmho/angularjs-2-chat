@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { Router, ActivatedRoute }                              from '@angular/router';
-import { TimeAgoPipe, DateFormatPipe }                         from 'angular2-moment';
-import { KeysPipe, ReversePipe, HandleError }                  from '../shared';
-import { ChatService }                                         from './chat.service';
-
-import { ChatDetailFormComponent }                             from './chat-detail-form.component';
+import { Component, OnInit, OnDestroy, ViewChild,
+         ElementRef } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { TimeAgoPipe, DateFormatPipe } from 'angular2-moment';
+import { KeysPipe, ReversePipe, HandleError } from '../shared';
+import { ChatDetail } from './chat-models';
+import { ChatService } from './chat.service';
+import { ChatDetailFormComponent } from './chat-detail-form.component';
 
 @Component({
   selector: 'my-chat-detail',
@@ -15,8 +16,10 @@ import { ChatDetailFormComponent }                             from './chat-deta
 })
 
 export class ChatDetailComponent implements OnInit, OnDestroy {
-  private sub: any;
   private chatDetail: any;
+  private chatID: string;
+  private sub: any;
+
   private users: any;
   @ViewChild('scrollMe') myScrollContainer: ElementRef;
 
@@ -26,33 +29,42 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
     private service: ChatService) {}
 
   ngOnInit() {
-    // Pulls in Chat Detail ID based on URL
-    this.sub = this.route.params.subscribe(params => {
-      let id = +params['id'];
-      // Observes chat detail data via service,
-      // updates `this.chatDetail` on success
-      this.service.getChatDetail(id).subscribe(
+    // Subscribe to ActivatedRoute for params
+    this.sub = this.route.params
+      .subscribe(
+        params => {
+          let id = params['id'];
+          this.chatID = id.toString();
+          this.fetchData();
+        },
+        error => HandleError(error)
+      );
+  }
+
+  ngOnDestroy() {
+    // TODO: Unsubscribe from all subscriptions on destroy
+  }
+
+  fetchData() {
+    /* Observes chat detail data via service,
+       updates `this.chatDetail` on success */
+    this.service.getChatDetail(this.chatID)
+      .subscribe(
         chatDetail => {
           this.chatDetail = chatDetail;
           this.scrollToBottom();
         },
         error => HandleError(error)
       );
-      // Observes user data via service,
-      // updates `this.users` on success
-      this.service.getUsers().subscribe(
-        users => this.users = users,
+    /*  Observes user data via service,
+        updates `this.users` on success */
+    this.service.getUsers()
+      .subscribe(
+        users => {
+          this.users = users;
+        },
         error => HandleError(error)
       );
-    });
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
-
-  addTextMessage(content) {
-    console.log('ChatDetailComponent addTextMessage() 🔥 w/ `' + content + '`');
   }
 
   scrollToBottom(): void {

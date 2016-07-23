@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
-import { NgForm }    from '@angular/forms';
-import { TimeAgoPipe, DateFormatPipe }                         from 'angular2-moment';
-import { KeysPipe, ReversePipe, HandleError }                  from '../shared';
-import { ChatService }                                         from './chat.service';
-
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, EventEmitter,
+         Output, Input } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { TimeAgoPipe, DateFormatPipe } from 'angular2-moment';
+import { KeysPipe, ReversePipe, HandleError } from '../shared';
+import { ChatService } from './chat.service';
 
 @Component({
   selector: 'my-chat-detail-form',
@@ -14,11 +15,12 @@ import { ChatService }                                         from './chat.serv
 
 export class ChatDetailFormComponent implements OnInit, OnDestroy {
   @ViewChild('text') myTextInput: ElementRef;
-  @Output() onSubmit = new EventEmitter<boolean>();
-
+  @Input('chatDetail') chatDetail: any;
+  @Output() onMessageSent = new EventEmitter<boolean>();
   private textMessage = '';
 
   constructor(
+    private route: ActivatedRoute,
     private service: ChatService) {}
 
   ngOnInit() {
@@ -27,10 +29,15 @@ export class ChatDetailFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
-  addTextMessage(textMessage) {
-    this.onSubmit.emit(textMessage);
+  addTextMessage(textMessage: string) {
+    if (textMessage === '') { return; };
     this.textMessage = '';
     this.myTextInput.nativeElement.focus();
+    this.service.postMessage(this.chatDetail, 'text', textMessage)
+      .subscribe(
+        resolve => this.onMessageSent.emit(resolve),
+        error => HandleError(error)
+      );
   }
 
 }

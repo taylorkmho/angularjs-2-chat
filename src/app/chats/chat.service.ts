@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import * as moment from 'moment';
 import { ChatDetail } from './chat-models';
 import { HandleError } from '../shared';
 import 'rxjs/add/operator/map';
@@ -17,11 +18,11 @@ export class ChatService {
       .map( response => response.json() as ChatDetail[] );
   }
 
-  getChatDetail(id: number): Observable<any> {
+  getChatDetail(id: string): Observable<any> {
     return this.http.get(this.apiChatList)
       .map( response => {
         return response.json()
-          .find(chatDetail => chatDetail.id === +id);
+          .find(chatDetail => chatDetail.id === id);
       });
   }
 
@@ -30,19 +31,25 @@ export class ChatService {
       .map( response => response.json() );
   }
 
-  addTextMessage(content: any): Observable<any> {
-    let body = JSON.stringify({ name });
-    let headers = new Headers({ 'Content-Type': 'application/json' });
+  postMessage(chatDetail: any, type: string, content: any) {
+    let newMessage = {
+      'authorID': '0',
+      'text': content,
+      'sentAt': moment()
+    };
+    if (type === 'text') {
+      console.log('posting text');
+    } else if (type === 'image') {
+    }
+    chatDetail.messageThread.unshift(newMessage);
+
+    let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.url, body, options)
-                    .map(this.extractData)
-                    .catch(HandleError);
+    return this.http.put(
+        this.apiChatList + '/' + chatDetail.id,
+        JSON.stringify(chatDetail),
+        options
+      ).map(response => response.json() );
   }
-
-  private extractData(res: Response) {
-    let body = res.json();
-    return body.data || { };
-  }
-
 }

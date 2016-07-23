@@ -37,8 +37,12 @@
     margin-bottom: 18px;
     background-size: cover;
     background-position: center center;
+    background-color: $c-ui-elements;
     overflow: hidden;
     border-radius: 50%;
+  }
+  figure {
+    margin: 0;
   }
   &__text {
     display: inline-block;
@@ -49,8 +53,19 @@
   }
   &__name,
   &__time {
+    display: inline-block;
     color: $c-copy--lighter;
     font-size: .75rem;
     font-weight: 300;
+  }
+  &--right {
+    flex-direction: row-reverse;
+    main {
+      text-align: right;
+    }
+    aside {
+      margin-right: 0;
+      margin-left: $l-gutter;
+    }
   }
 }
