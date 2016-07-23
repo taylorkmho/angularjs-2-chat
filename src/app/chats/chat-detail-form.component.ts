@@ -26,6 +26,7 @@ export class ChatDetailFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
+  // TODO: store textMessage in localStorage onDestroy
   ngOnDestroy() {
   }
 
@@ -39,5 +40,9 @@ export class ChatDetailFormComponent implements OnInit, OnDestroy {
         error => HandleError(error)
       );
   }
+
+  // TODO: (❕❕❕) create addImageMessage() method
+  //       https://github.com/valor-software/ng2-file-upload
+  // TODO: create addEmoji() method
 
 }

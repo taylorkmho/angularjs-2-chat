@@ -19,3 +19,14 @@ export class KeysPipe implements PipeTransform {
     return keys;
   }
 }
+
+// TODO: (❕) Build custom pipe for time sent using moment
+// Spec-
+// if >= 1, < 2 days old
+//  return as `1 day ago`
+// if >= 2 days old
+//  return as `{{x}} days ago`
+// if >= 4 days old
+//  return as `Jul 23`
+// else
+//  return as ``

@@ -42,9 +42,10 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // TODO: Unsubscribe from all subscriptions on destroy
+    // TODO: (❕) Unsubscribe from all subscriptions on destroy
   }
 
+  // TODO: (❕) connect to socket.io for chat data
   fetchData() {
     /* Observes chat detail data via service,
        updates `this.chatDetail` on success */
