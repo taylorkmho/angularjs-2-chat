@@ -7,29 +7,27 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ChatService {
-  private url = 'http://localhost:8080/api/chat-data.json';
+  private apiChatList = 'http://5792b69b11a91c1100a92743.mockapi.io/api/chatLists';
+  private apiUsers    = 'http://5792b69b11a91c1100a92743.mockapi.io/api/users';
+
   constructor(private http: Http) {}
 
   getChatLists(): Observable<any> {
-    return this.http.get(this.url)
-      .map( response => {
-        return response.json().data.chatThreads as ChatDetail[];
-      });
+    return this.http.get(this.apiChatList)
+      .map( response => response.json() as ChatDetail[] );
   }
 
   getChatDetail(id: number): Observable<any> {
-    return this.http.get(this.url)
+    return this.http.get(this.apiChatList)
       .map( response => {
-        return response.json().data.chatThreads
+        return response.json()
           .find(chatDetail => chatDetail.id === +id);
       });
   }
 
   getUsers(): Observable<any> {
-    return this.http.get(this.url)
-      .map( response => {
-        return response.json().data.users;
-      });
+    return this.http.get(this.apiUsers)
+      .map( response => response.json() );
   }
 
   addTextMessage(content: any): Observable<any> {
