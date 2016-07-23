@@ -4,8 +4,13 @@ body {
   color: $c-copy;
   font-family: $f-body;
   font-size: 100%;
-  background-color: #eee;
+  background-color: $c-body-bg;
 }
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
 a {
   color: $c-primary;
 }
