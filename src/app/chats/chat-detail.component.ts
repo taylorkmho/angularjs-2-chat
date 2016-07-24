@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild,
          ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DateFormatPipe } from 'angular2-moment';
-import { KeysPipe, ReversePipe, HandleError } from '../shared';
+import { ApiService, KeysPipe, ReversePipe, HandleError } from '../shared';
 import { ChatDetail } from './chat-models';
 import { ChatService } from './chat.service';
 import { ChatFormComponent } from './chat-detail/chat-form.component';
@@ -16,7 +16,7 @@ import { ChatFormComponent } from './chat-detail/chat-form.component';
 })
 
 export class ChatDetailComponent implements OnInit, OnDestroy {
-  private chatDetail: ChatDetail[];
+  private chatDetail: any;
   private chatID: string;
   private sub: any;
 
@@ -26,7 +26,8 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: ChatService) {}
+    private chatService: ChatService,
+    private apiService: ApiService ) {}
 
   ngOnInit() {
     // Subscribe to ActivatedRoute for params
@@ -46,12 +47,16 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
     //            also apply to chatListComponent subs
   }
 
-  // TODO: (❕) connect to socket.io for chat data
   fetchData() {
-    this.service.getChatDetail(this.chatID)
+    this.chatService.getChatDetail(this.chatID)
       .subscribe(
         chatDetail => {
           this.chatDetail = chatDetail;
+
+          // TODO: Change "USER" to user name
+          let title = this.chatDetail.userIDs.length > 1 ? 'GROUP' : 'USER';
+          this.apiService.setTitle(title);
+
           setTimeout( () => {
             this.scrollToBottom();
           }, 250);
@@ -59,7 +64,7 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
         error => HandleError(error)
       );
 
-    this.service.getUsers()
+    this.chatService.getUsers()
       .subscribe(
         users => this.users = users,
         error => HandleError(error)

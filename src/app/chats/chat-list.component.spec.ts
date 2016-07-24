@@ -6,6 +6,7 @@ import { MockBackend } from '@angular/http/testing';
 import { Observable } from 'rxjs/Rx';
 
 import { ChatService } from './chat.service';
+import { ApiService } from '../shared/api.service';
 import { ChatListComponent } from './chat-list.component';
 
 class ChatServiceMock{
@@ -35,6 +36,7 @@ class ChatServiceMock{
 describe('Chat List Component', () => {
   let chatListComponent: ChatListComponent,
       chatService,
+      apiService,
       router;
 
   beforeEach(()=>{
@@ -44,7 +46,8 @@ describe('Chat List Component', () => {
     ])
     router = Router;
     chatService = new ChatServiceMock;
-    chatListComponent = new ChatListComponent(router, chatService);
+    apiService = new ApiService;
+    chatListComponent = new ChatListComponent(router, chatService, apiService);
   })
 
   it('should get chat lists on init', () => {

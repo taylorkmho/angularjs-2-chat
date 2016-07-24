@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChatService } from './chat.service';
 import { ChatPreviewComponent } from './chat-list';
-import { TimeAgoPipe, ReversePipe, KeysPipe, HandleError } from '../shared';
+import { ApiService, TimeAgoPipe, ReversePipe, KeysPipe, HandleError } from '../shared';
 import { DateFormatPipe } from 'angular2-moment';
 
 @Component({
@@ -19,10 +19,13 @@ export class ChatListComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private service: ChatService ) {}
+    private chatService: ChatService,
+    private apiService: ApiService ) {}
 
   ngOnInit() {
-    this.sub = this.service.getChatLists()
+    this.apiService.setTitle('CHAT');
+
+    this.sub = this.chatService.getChatLists()
       .subscribe(
         chatList => this.chatList = chatList,
         error => HandleError(error)

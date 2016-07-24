@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { HTTP_PROVIDERS } from '@angular/http';
+import { Subscription } from 'rxjs/Subscription';
 
-import { ApiService } from './shared';
+import { ApiService, HandleError } from './shared';
 import { ChatService } from './chats/chat.service';
 
 import '../style/app.scss';
@@ -18,8 +19,24 @@ import '../style/app.scss';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'CHAT';
-  constructor(private api: ApiService) {
+
+export class AppComponent implements OnInit, OnDestroy {
+  title: string;
+  subscription: Subscription;
+
+  constructor(private apiService: ApiService) {
   }
+
+  ngOnInit() {
+    this.subscription = this.apiService.newTitleSet$
+      .subscribe(
+        title => this.title = title,
+        error => HandleError(error)
+      );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
 }

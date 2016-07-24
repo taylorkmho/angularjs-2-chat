@@ -35,8 +35,7 @@ export class TimeAgoPipe implements PipeTransform, OnDestroy {
     this._removeTimer();
     const timeToUpdate = this._getSecondsUntilUpdate(momentInstance) * 1000;
     this._currentTimer = window.setTimeout(() => this._cdRef.markForCheck(), timeToUpdate);
-    const secAgo = -momentInstance.diff(momentConstructor(),'seconds');
-    console.log(secAgo);
+    const secAgo = -momentInstance.diff(momentConstructor(), 'seconds');
 
     if (secAgo < 60) { // if under a minute
       return 'now';

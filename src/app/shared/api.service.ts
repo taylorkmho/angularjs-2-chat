@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Subject }    from 'rxjs/Subject';
 
 @Injectable()
 export class ApiService {
-  title = 'Angular 2';
+  private titleSource = new Subject<string>();
+  newTitleSet$ = this.titleSource.asObservable();
+
+  setTitle(newTitle: string) {
+    this.titleSource.next(newTitle);
+  }
+
 }
 
 export function HandleError (error: any) {
