@@ -15,7 +15,7 @@ import { DateFormatPipe } from 'angular2-moment';
 export class ChatListComponent implements OnInit, OnDestroy {
   chatList: any;
   users: any;
-  private sub: any;
+  private sub: Subscription;
 
   constructor(
     private router: Router,

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { KeysPipe, ReversePipe, HandleError } from '../../shared';
 import { ChatDetail } from './../chat-models';
 import { ChatService } from './../chat.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'my-chat-form',
@@ -21,6 +22,7 @@ export class ChatFormComponent implements OnInit, OnDestroy {
   private isImage: boolean = false;
   private placeholder: string = 'Write a message';
   private message = '';
+  private sub: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,6 +33,7 @@ export class ChatFormComponent implements OnInit, OnDestroy {
 
   // TODO: store textMessage in localStorage onDestroy
   ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   handleWarning(warning: any) {
@@ -50,7 +53,7 @@ export class ChatFormComponent implements OnInit, OnDestroy {
       return;
     }
     let messageType = this.isImage ? 'image' : 'text';
-    this.service.postMessage(this.chatDetail, messageType, this.message)
+    this.sub = this.service.postMessage(this.chatDetail, messageType, this.message)
       .subscribe(
         resolve => {
           this.onMessageSent.emit(resolve);

@@ -6,6 +6,7 @@ import { ApiService, KeysPipe, ReversePipe, HandleError } from '../shared';
 import { ChatDetail } from './chat-models';
 import { ChatService } from './chat.service';
 import { ChatFormComponent } from './chat-detail/chat-form.component';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'my-chat-detail',
@@ -18,7 +19,9 @@ import { ChatFormComponent } from './chat-detail/chat-form.component';
 export class ChatDetailComponent implements OnInit, OnDestroy {
   private chatDetail: any;
   private chatID: string;
-  private sub: any;
+  private routesSub: Subscription;
+  private chatDetailSub: Subscription;
+  private usersSub: Subscription;
 
   private users: any;
   @ViewChild('scrollMe') myScrollContainer: ElementRef;
@@ -31,7 +34,7 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Subscribe to ActivatedRoute for params
-    this.sub = this.route.params
+    this.routesSub = this.route.params
       .subscribe(
         params => {
           let id = params['id'];
@@ -43,12 +46,13 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // TODO: (❕) Unsubscribe from all subscriptions on destroy
-    //            also apply to chatListComponent subs
+    this.routesSub.unsubscribe();
+    this.chatDetailSub.unsubscribe();
+    this.usersSub.unsubscribe();
   }
 
   fetchData() {
-    this.chatService.getChatDetail(this.chatID)
+    this.chatDetailSub = this.chatService.getChatDetail(this.chatID)
       .subscribe(
         chatDetail => {
           let title = chatDetail.users.length > 1 ? 'GROUP' : chatDetail.users[0].name;
@@ -63,7 +67,7 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
         error => HandleError(error)
       );
 
-    this.chatService.getUsers()
+    this.usersSub = this.chatService.getUsers()
       .subscribe(
         users => this.users = users,
         error => HandleError(error)
