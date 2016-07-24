@@ -79,28 +79,92 @@
         "id":"2",
         "users":[
           {
-            "id":"2",
-            "name":"Susan Kelley"
-          }
-        ],
-        "lastUpdated":"2015-07-20T01:40:21.196-0700",
-        "messageThread":[
-          {
-            "userID":"2",
-            "type":"text",
-            "content":"Helloooo",
-            "sentAt":"2015-07-20T01:40:21.196-0700"
+            "id":"7",
+            "name":"Alan Soto"
           },
           {
-            "userID":"2",
+            "id":"8",
+            "name":"Susan Gomez"
+          }
+        ],
+        "lastUpdated":"2016-06-10T13:50:21.196-0700",
+        "messageThread":[
+          {
+            "userID":"8",
             "type":"text",
-            "content":"Hello, are you there?",
-            "sentAt":"2015-07-20T01:40:21.196-0700"
+            "content":"ALRIGHT WE GET IT, YOU'RE A DAD NOW! 🙄",
+            "sentAt":"2016-07-10T13:50:21.196-0700"
+          },
+          {
+            "userID":"7",
+            "type":"text",
+            "content":"One day, I hope to make an asbestos removal company... The slogan will be &ldquo;We'll do asbestos we can&rdquo;",
+            "sentAt":"2016-07-10T13:20:21.196-0700"
+          },
+          {
+            "userID":"7",
+            "type":"text",
+            "content":"But you won't be able to see out of it, because you can't install Windows on Apple Products.",
+            "sentAt":"2016-06-09T13:08:21.196-0700"
+          },
+          {
+            "userID":"7",
+            "type":"text",
+            "content":"I made a belt out of old watches. It was a waist of time.",
+            "sentAt":"2016-06-08T13:38:21.196-0700"
+          },
+          {
+            "userID":"7",
+            "type":"text",
+            "content":"I think I swallowed some food colouring. I've dyed a little inside.",
+            "sentAt":"2016-06-07T11:50:21.196-0700"
+          },
+          {
+            "userID":"7",
+            "type":"text",
+            "content":"What kind of shoes go frogs wear? Open toad.",
+            "sentAt":"2016-06-06T9:52:21.196-0700"
+          },
+          {
+            "userID":"0",
+            "type":"text",
+            "content":"🙄🙄🙄",
+            "sentAt":"2016-06-05T10:55:21.196-0700"
+          },
+          {
+            "userID":"7",
+            "type":"text",
+            "content":"A man died in a tragic skydiving accident... Many say he left the impact on the world.",
+            "sentAt":"2016-06-05T10:53:21.196-0700"
           }
         ]
       },
       {
         "id":"3",
+        "users":[
+          {
+            "id":"8",
+            "name":"Susan Gomez"
+          }
+        ],
+        "lastUpdated":"2016-06-10T13:40:21.196-0700",
+        "messageThread":[
+          {
+            "userID":"0",
+            "type":"text",
+            "content":"Dont't encourage him haha",
+            "sentAt":"2016-06-10T13:40:21.196-0700"
+          },
+          {
+            "userID":"8",
+            "type":"text",
+            "content":"Alright alright, some of these jokes are actually kind of funny.",
+            "sentAt":"2016-06-11T13:40:21.196-0700"
+          }
+        ]
+      },
+      {
+        "id":"4",
         "users":[
           {
             "id":"6",
@@ -134,7 +198,7 @@
         ]
       },
       {
-        "id":"4",
+        "id":"5",
         "users":[
           {
             "id":"4",
@@ -188,60 +252,26 @@
         ]
       },
       {
-        "id":5,
+        "id":"6",
         "users":[
           {
-            "id":"7",
-            "name":"Alan Soto"
-          },
-          {
-            "id":"8",
-            "name":"Susan Gomez"
+            "id":"2",
+            "name":"Susan Kelley"
           }
         ],
-        "lastUpdated":"2016-06-10T13:50:21.196-0700",
+        "lastUpdated":"2015-07-20T01:40:21.196-0700",
         "messageThread":[
           {
-            "userID":"8",
+            "userID":"2",
             "type":"text",
-            "content":"ALRIGHT WE GET IT, YOU'RE A DAD NOW! 🙄",
-            "sentAt":"2016-06-10T13:50:21.196-0700"
+            "content":"Helloooo",
+            "sentAt":"2015-07-20T01:40:21.196-0700"
           },
           {
-            "userID":"7",
+            "userID":"2",
             "type":"text",
-            "content":"One day, I hope to make an asbestos removal company... The slogan will be &ldquo;We'll do asbestos we can&rdquo;",
-            "sentAt":"2016-06-10T13:50:21.196-0700"
-          },
-          {
-            "userID":"7",
-            "type":"text",
-            "content":"But you won't be able to see out of it, because you can't install Windows on Apple Products.",
-            "sentAt":"2016-06-09T13:50:21.196-0700"
-          },
-          {
-            "userID":"7",
-            "type":"text",
-            "content":"I made a belt out of old watches. It was a waist of time.",
-            "sentAt":"2016-06-08T13:50:21.196-0700"
-          },
-          {
-            "userID":"7",
-            "type":"text",
-            "content":"I think I swallowed some food colouring. I've dyed a little inside.",
-            "sentAt":"2016-06-07T13:50:21.196-0700"
-          },
-          {
-            "userID":"7",
-            "type":"text",
-            "content":"What kind of shoes go frogs wear? Open toad.",
-            "sentAt":"2016-06-06T13:50:21.196-0700"
-          },
-          {
-            "userID":"7",
-            "type":"text",
-            "content":"A man died in a tragic skydiving accident... Many say he left the impact on the world.",
-            "sentAt":"2016-06-05T13:50:21.196-0700"
+            "content":"Hello, are you there?",
+            "sentAt":"2015-07-20T01:40:21.196-0700"
           }
         ]
       }
