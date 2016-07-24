@@ -1,9 +1,11 @@
 <!-- TODO: navigation
-     Spec: (❕❕) update on view update
-           add button for new message
+     Spec: add button for new message
            add button to "reset" data -->
 
 <header>
+  <button [class.is-visible]="displayBackButton" (click)="backClicked()">
+    <img src="/img/icon-back.svg" />
+  </button>
   <h1>
     {{title}}
   </h1>

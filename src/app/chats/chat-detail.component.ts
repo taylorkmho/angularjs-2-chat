@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild,
          ElementRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { DateFormatPipe } from 'angular2-moment';
 import { ApiService, KeysPipe, ReversePipe, HandleError } from '../shared';
 import { ChatDetail } from './chat-models';
@@ -28,9 +28,10 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private chatService: ChatService,
-    private apiService: ApiService ) {}
+    private apiService: ApiService ) {
+      apiService.displayBackButton(true);
+  }
 
   ngOnInit() {
     // Subscribe to ActivatedRoute for params
@@ -81,9 +82,4 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
       HandleError(err);
     }
   }
-
-  gotoChatList() {
-    this.router.navigate(['/chat-list']);
-  }
-
 }

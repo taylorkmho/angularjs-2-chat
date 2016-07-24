@@ -21,11 +21,12 @@ export class ChatListComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private chatService: ChatService,
-    private apiService: ApiService ) {}
+    private apiService: ApiService ) {
+      apiService.displayBackButton(false);
+      apiService.setTitle('CHAT');
+  }
 
   ngOnInit() {
-    this.apiService.setTitle('CHAT');
-
     this.sub = this.chatService.getChatLists()
       .subscribe(
         chatList => this.chatList = chatList,

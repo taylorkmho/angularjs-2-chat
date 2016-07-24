@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { HTTP_PROVIDERS } from '@angular/http';
+import { Location } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 
 import { ApiService, HandleError } from './shared';
@@ -22,21 +23,35 @@ import '../style/app.scss';
 
 export class AppComponent implements OnInit, OnDestroy {
   title: string;
-  subscription: Subscription;
+  displayBackButton: boolean = false;
+  titleSub: Subscription;
+  backButtonSub: Subscription;
 
-  constructor(private apiService: ApiService) {
+  constructor(
+    private apiService: ApiService,
+    private location: Location) {
   }
 
   ngOnInit() {
-    this.subscription = this.apiService.newTitleSet$
+    this.titleSub = this.apiService.newTitleSet$
       .subscribe(
         title => this.title = title,
+        error => HandleError(error)
+      );
+
+    this.backButtonSub = this.apiService.backButtonSet$
+      .subscribe(
+        display => this.displayBackButton = display,
         error => HandleError(error)
       );
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.titleSub.unsubscribe();
+  }
+
+  backClicked(){
+    this.location.back();
   }
 
 }

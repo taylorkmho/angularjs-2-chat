@@ -4,8 +4,14 @@ import { Subject }    from 'rxjs/Subject';
 
 @Injectable()
 export class ApiService {
+  private backButton = new Subject<boolean>();
+  backButtonSet$ = this.backButton.asObservable();
   private titleSource = new Subject<string>();
   newTitleSet$ = this.titleSource.asObservable();
+
+  displayBackButton(display: boolean) {
+    this.backButton.next(display);
+  }
 
   setTitle(newTitle: string) {
     this.titleSource.next(newTitle);

@@ -29,6 +29,30 @@ header {
   }
 }
 
+button {
+  position: absolute;
+  top: 50%;
+  left: $l-gutter;
+  background: none;
+  border: none;
+  color: #fff;
+  transform: translateY(-50%) translateX(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 150ms ease-out;
+  outline: none;
+  &.is-visible {
+    transform: translateY(-50%) translateX(0);
+    opacity: 1;
+    pointer-events: initial;
+    cursor: pointer;
+    &:hover,
+    &:focus {
+      opacity: .8;
+    }
+  }
+}
+
 
 main {
   display: block;
