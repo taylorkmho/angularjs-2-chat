@@ -1,14 +1,66 @@
 @import '../../../style/theme';
 
 :host {
+  position: relative;
   display: block;
   padding: $l-gutter;
   border-top: 1px solid $c-ui-elements;
-}
-
-form {
   display: flex;
   width: 100%;
+}
+
+.warning-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-100%);
+  width: 100%;
+  background-color: rgba($c-primary, .9);
+  padding: ($l-gutter/2) ($l-gutter*2) ($l-gutter/2) $l-gutter;
+  text-align: center;
+  font-size: .85rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 250ms ease-out;
+  cursor: pointer;
+  &.is-visible {
+    opacity: 1;
+    pointer-events: initial;
+  }
+  &:hover {
+    background-color: $c-primary;
+  }
+  &:after {
+    content: "×";
+    position: absolute;
+    top: 50%;
+    right: $l-gutter;
+    transform: translateY(-50%);
+  }
+}
+
+.text-container {
+  position: relative;
+  flex-grow: 1;
+  margin-right: $l-gutter;
+  label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    height: 100%;
+    padding: ($l-gutter/2);
+    cursor: pointer;
+    opacity: .5;
+    transition: opacity 150ms ease-out;
+    &:hover {
+      opacity: 1;
+    }
+    img {
+      display: block;
+      height: 100%;
+    }
+  }
 }
 
 input {
@@ -20,11 +72,10 @@ input {
 }
 
 input[type="text"] {
-  flex-grow: 1;
+  width: 100%;
   background: $c-ui-elements;
   border: 2px solid transparent;
-  margin-right: $l-gutter;
-  padding: ($l-gutter/2);
+  padding: ($l-gutter/2) ($l-gutter*2.5) ($l-gutter/2) ($l-gutter/2);
   &:focus {
     border: 2px solid $c-primary;
   }
@@ -33,6 +84,7 @@ input[type="text"] {
 input[type="submit"] {
   background: #fff;
   color: $c-copy--light;
+  cursor: pointer;
   &:hover,
   &:focus {
     background-color: darken(#fff, 5%);
@@ -40,4 +92,13 @@ input[type="submit"] {
   &:active {
     background-color: darken(#fff, 7.5%);
   }
+}
+
+input[type="file"] {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }

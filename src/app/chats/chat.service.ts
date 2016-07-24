@@ -33,13 +33,10 @@ export class ChatService {
   postMessage(chatDetail: any, type: string, content: any) {
     let newMessage = {
       'authorID': '0',
-      'text': content,
+      'type': type,
+      'content': content,
       'sentAt': moment()
     };
-    if (type === 'text') {
-      console.log('posting text');
-    } else if (type === 'image') {
-    }
     chatDetail.messageThread.unshift(newMessage);
     chatDetail.lastUpdated = moment();
 

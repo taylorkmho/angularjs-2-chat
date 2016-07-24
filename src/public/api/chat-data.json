@@ -43,16 +43,24 @@
     		],
             "lastUpdated": "2016-07-20T01:40:21.196-0700",
     		"messageThread": [
-    			{
-    				"authorID": "3",
-    				"text": "Me neither.",
-    				"sentAt": "2016-07-20T01:40:21.196-0700"
-    			},
-    			{
-    				"authorID": "1",
-    				"text": "I just don't know",
-    				"sentAt": "2016-07-20T01:32:21.196-0700"
-    			}
+                {
+                    "authorID": "3",
+                    "type": "text",
+                    "content": "That is just downright impressive",
+                    "sentAt": "2016-07-20T01:32:21.196-0700"
+                },
+                {
+                    "authorID": "1",
+                    "type": "image",
+                    "content": "http://i.giphy.com/Wbnl9s2bdS62I.gif",
+                    "sentAt": "2016-07-20T01:32:21.196-0700"
+                },
+                {
+                    "authorID": "0",
+                    "type": "text",
+                    "content": "I am starving. Can you make me a pancake?",
+                    "sentAt": "2016-07-20T01:40:21.196-0700"
+                }
     		]
     	},
     	{
@@ -64,12 +72,14 @@
     		"messageThread": [
     			{
     				"authorID": "2",
-    				"text": "Helloooo",
+                    "type": "text",
+    				"content": "Helloooo",
     				"sentAt": "2016-07-18T01:40:21.196-0700"
     			},
     			{
     				"authorID": "2",
-    				"text": "Hello, are you there?",
+                    "type": "text",
+    				"content": "Hello, are you there?",
     				"sentAt": "2016-07-18T01:40:21.196-0700"
     			}
     		]
@@ -85,7 +95,8 @@
     		"messageThread": [
     			{
     				"authorID": "5",
-    				"text": "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.",
+                    "type": "text",
+    				"content": "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.",
     				"sentAt": "2014-07-01T01:40:21.196-0700"
     			}
     		]

@@ -4,7 +4,8 @@
       <aside class="message__avatar" [ngStyle]="{'background-image': 'url(/img/avatar/' + message.authorID + '.jpg)'}"></aside>
       <main>
         <figure>
-          <p class="message__text">{{message.text}}</p>
+          <p *ngIf="message.type === 'text'" class="message__text">{{message.content}}</p>
+          <img *ngIf="message.type === 'image'" class="message__image" src="{{message.content}}" />
           <figcaption>
             <div class="message__name">
               <!-- TODO: prevent extra div's from being produced -->

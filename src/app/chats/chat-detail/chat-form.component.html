@@ -1,4 +1,7 @@
-<form (ngSubmit)="addTextMessage(textMessage)" #chatForm="ngForm">
-  <input #text [(ngModel)]="textMessage" name="text" (keyup)="textMessage=text.value" type="text" placeholder="Write a message" />
-  <input type="submit" value="SEND" />
-</form>
+<div class="warning-message" #loaderBar [class.is-visible]="showWarning" (click)="handleWarning(false)"></div>
+<div class="text-container">
+  <input #text [(ngModel)]="textMessage" name="text" (keyup)="onKeyUp($event)" type="text" placeholder="Write a message" />
+  <label for="upload-image"><img src="/img/icon-photo.svg" /></label>
+  <input (change)="imageSelected($event)" id="upload-image" name="upload-image" type="file" value="Upload" accept="image/*" />
+</div>
+<input (click)="addTextMessage()" type="submit" value="SEND" />
