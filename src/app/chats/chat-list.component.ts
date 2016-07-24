@@ -4,6 +4,7 @@ import { ChatService } from './chat.service';
 import { ChatPreviewComponent } from './chat-list';
 import { ApiService, TimeAgoPipe, ReversePipe, KeysPipe, HandleError } from '../shared';
 import { DateFormatPipe } from 'angular2-moment';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'my-chat-list',

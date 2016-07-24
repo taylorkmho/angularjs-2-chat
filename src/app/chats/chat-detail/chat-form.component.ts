@@ -33,7 +33,9 @@ export class ChatFormComponent implements OnInit, OnDestroy {
 
   // TODO: store textMessage in localStorage onDestroy
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 
   handleWarning(warning: any) {
