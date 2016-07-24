@@ -52,7 +52,9 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
       .subscribe(
         chatDetail => {
           this.chatDetail = chatDetail;
-          this.scrollToBottom();
+          setTimeout( () => {
+            this.scrollToBottom();
+          }, 250);
         },
         error => HandleError(error)
       );
@@ -66,9 +68,7 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
 
   scrollToBottom(): void {
     try {
-      setTimeout( () => {
-        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-      }, 250);
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
     } catch (err) {
       HandleError(err);
     }

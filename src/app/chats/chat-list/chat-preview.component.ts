@@ -32,8 +32,9 @@ export class ChatPreviewComponent implements OnInit, OnDestroy {
         },
         error => HandleError(error)
       );
-    this.message = this.chatDetail.messageThread[0].text;
-    this.timeAgo = this.chatDetail.messageThread[0].sentAt;
+    let thisMessage = this.chatDetail.messageThread[0];
+    this.message = thisMessage.type === 'image' ? '[Image]' : thisMessage.content;
+    this.timeAgo = thisMessage.sentAt;
   }
 
   ngOnDestroy() {

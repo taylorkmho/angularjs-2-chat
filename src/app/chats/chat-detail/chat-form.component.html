@@ -1,7 +1,9 @@
 <div class="warning-message" #loaderBar [class.is-visible]="showWarning" (click)="handleWarning(false)"></div>
-<div class="text-container">
-  <input #text [(ngModel)]="textMessage" name="text" (keyup)="onKeyUp($event)" type="text" placeholder="Write a message" />
-  <label for="upload-image"><img src="/img/icon-photo.svg" /></label>
-  <input (change)="imageSelected($event)" id="upload-image" name="upload-image" type="file" value="Upload" accept="image/*" />
-</div>
-<input (click)="addTextMessage()" type="submit" value="SEND" />
+<form (ngSubmit)="addMessage(message)" #chatForm="ngForm">
+  <fieldset name="text-input" [class.is-image]="isImage">
+    <input #text [(ngModel)]="message" [(placeholder)]="placeholder" (keyup)="onKeyUp($event)" type="text" name="text" />
+    <label for="is-image"><img src="/img/icon-photo.svg" /></label>
+    <input (change)="setToImage($event)" id="is-image" name="is-image" type="checkbox" />
+  </fieldset>
+  <input type="submit" value="SEND" />
+</form>

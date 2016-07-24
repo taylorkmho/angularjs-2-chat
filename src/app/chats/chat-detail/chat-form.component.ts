@@ -18,9 +18,10 @@ export class ChatFormComponent implements OnInit, OnDestroy {
   @ViewChild('loaderBar') myLoaderBar: ElementRef;
   @Input('chatDetail') chatDetail: ChatDetail[];
   @Output() onMessageSent = new EventEmitter<boolean>();
-  private reader  = new FileReader();
-  private showWarning = false;
-  private textMessage = '';
+  private showWarning: boolean = false;
+  private isImage: boolean = false;
+  private placeholder: string = 'Write a message';
+  private message = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -33,18 +34,24 @@ export class ChatFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
-  handleWarning(message) {
-    if (message) {
+  handleWarning(warning: any) {
+    if (warning) {
       this.showWarning = true;
-      this.myLoaderBar.nativeElement.innerHTML = message;
+      this.myLoaderBar.nativeElement.innerHTML = warning;
     } else {
       this.showWarning = false;
     }
   }
 
-  addTextMessage() {
-    if (this.textMessage === '') { return; };
-    this.service.postMessage(this.chatDetail, 'text', this.textMessage)
+  addMessage(message: string) {
+    if (this.message === '') {
+      return;
+    } else if (this.isImage && !/([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/i.test(this.message)) {
+      this.handleWarning('Oops, that doesn&rsquo;t look like a valid URL. Please try again.');
+      return;
+    }
+    let messageType = this.isImage? 'image' : 'text';
+    this.service.postMessage(this.chatDetail, messageType, this.message)
       .subscribe(
         resolve => {
           this.onMessageSent.emit(resolve);
@@ -54,50 +61,28 @@ export class ChatFormComponent implements OnInit, OnDestroy {
           HandleError(error);
         }
       );
-    this.textMessage = '';
+    this.message = '';
     this.myTextInput.nativeElement.focus();
   }
 
   onKeyUp(value: KeyboardEvent) {
     let inputValue = this.myTextInput.nativeElement.value;
     if (value.key !== 'Enter') {
-      this.textMessage = inputValue;
+      this.message = inputValue;
     } else {
-      this.addTextMessage();
+      this.addMessage(this.message);
     }
   }
 
-  imageSelected(fileInput: any){
-    this.reader.onload = this.imageIsLoaded.bind(this);
-    this.reader.readAsDataURL(fileInput.target.files[0]);
-  }
-
-  imageIsLoaded(e) {
-    let contents = e.target.result,
-        error    = e.target.error,
-        size     = e.loaded / 1000; // to Megabytes
-
-    if (error != null) {
-      HandleError('File could not be read! Code ' + error.code);
-      this.handleWarning('Ahh, something went wrong there. Please try again.');
-    } else if (size > 1) {
-      this.handleWarning('That image is too big! Max file size is 1MB.');
+  setToImage(e) {
+    let value = e.target.checked;
+    this.isImage = value;
+    this.myTextInput.nativeElement.focus();
+    if (value) {
+      this.placeholder = 'Paste an image URL';
     } else {
-      this.addImageMessage(contents)
+      this.placeholder = 'Write a message';
     }
-  }
-
-  addImageMessage(image) {
-    this.service.postMessage(this.chatDetail, 'image', image)
-      .subscribe(
-        resolve => {
-          this.onMessageSent.emit(resolve);
-        },
-        error => {
-          this.handleWarning('Ahh, something went wrong there. Please try again.');
-          HandleError(error);
-        }
-      );
   }
 
   // TODO: create addEmoji() method
