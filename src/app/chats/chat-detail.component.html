@@ -1,16 +1,16 @@
 <div *ngIf="chatDetail" class="chat-detail">
   <ul #scrollMe class="chat-detail__thread">
-    <li class="message" *ngFor="let message of chatDetail.messageThread | myReverse; let messageIndex = index" [class.message--right]="message.authorID === '0'">
-      <aside class="message__avatar" [ngStyle]="{'background-image': 'url(/img/avatar/' + message.authorID + '.jpg)'}"></aside>
+    <li class="message" *ngFor="let message of chatDetail.messageThread | myReverse; let messageIndex = index" [class.message--right]="message.userID === '0'">
+      <aside class="message__avatar" [ngStyle]="{'background-image': 'url(/img/avatar/' + message.userID + '.jpg)'}"></aside>
       <main>
         <figure>
           <p *ngIf="message.type === 'text'" class="message__text">{{message.content}}</p>
           <img *ngIf="message.type === 'image'" class="message__image" src="{{message.content}}" />
           <figcaption>
             <div class="message__name">
-              <!-- TODO: prevent extra div's from being produced -->
+              <!-- <span *ngIf="message.userID !== '0'">{{message.userID}}</span> -->
               <div *ngFor="let user of users | myKeys">
-                <span *ngIf="message.authorID === user.value.id">{{user.value.name}}</span>
+                <span *ngIf="message.userID === user.value.id">{{user.value.name}}</span>
               </div>
             </div>
             <span class="message__time">{{message.sentAt | amDateFormat:'M/D h:mmA'}}</span>

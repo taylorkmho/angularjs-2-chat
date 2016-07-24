@@ -1,5 +1,5 @@
 <div class="component component--avatar">
-  <div class="author-avatar" *ngFor="let userID of chatDetail.userIDs | slice:0:2" [ngStyle]="{'background-image': 'url(/img/avatar/' + userID + '.jpg)'}"></div>
+  <div class="author-avatar" *ngFor="let user of chatDetail.users | slice:0:2" [ngStyle]="{'background-image': 'url(/img/avatar/' + user.id + '.jpg)'}"></div>
 </div>
 <div class="component component--copy">
   <div class="author-name">
