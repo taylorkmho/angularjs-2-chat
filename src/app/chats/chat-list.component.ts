@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChatService } from './chat.service';
 import { ChatPreviewComponent } from './chat-list';
-import { ReversePipe, KeysPipe, HandleError } from '../shared';
-import { TimeAgoPipe, DateFormatPipe } from 'angular2-moment';
+import { TimeAgoPipe, ReversePipe, KeysPipe, HandleError } from '../shared';
+import { DateFormatPipe } from 'angular2-moment';
 
 @Component({
   selector: 'my-chat-list',

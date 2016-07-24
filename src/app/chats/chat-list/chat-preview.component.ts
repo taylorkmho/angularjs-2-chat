@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ChatService } from '../chat.service';
-import { KeysPipe, HandleError } from '../../shared';
-import { TimeAgoPipe, DateFormatPipe } from 'angular2-moment';
+import { TimeAgoPipe, KeysPipe, HandleError } from '../../shared';
+import { DateFormatPipe } from 'angular2-moment';
 
 @Component({
   selector: 'my-chat-preview',

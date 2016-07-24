@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, EventEmitter,
          Output, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TimeAgoPipe, DateFormatPipe } from 'angular2-moment';
 import { KeysPipe, ReversePipe, HandleError } from '../../shared';
 import { ChatDetail } from './../chat-models';
 import { ChatService } from './../chat.service';
@@ -10,7 +9,7 @@ import { ChatService } from './../chat.service';
   selector: 'my-chat-form',
   templateUrl: './chat-form.component.html',
   styleUrls: ['./chat-form.component.scss'],
-  pipes: [ReversePipe, TimeAgoPipe, DateFormatPipe, KeysPipe]
+  pipes: [ReversePipe,  KeysPipe]
 })
 
 export class ChatFormComponent implements OnInit, OnDestroy {
@@ -50,7 +49,7 @@ export class ChatFormComponent implements OnInit, OnDestroy {
       this.handleWarning('Oops, that doesn&rsquo;t look like a valid URL. Please try again.');
       return;
     }
-    let messageType = this.isImage? 'image' : 'text';
+    let messageType = this.isImage ? 'image' : 'text';
     this.service.postMessage(this.chatDetail, messageType, this.message)
       .subscribe(
         resolve => {

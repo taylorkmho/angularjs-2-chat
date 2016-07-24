@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild,
          ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { TimeAgoPipe, DateFormatPipe } from 'angular2-moment';
+import { DateFormatPipe } from 'angular2-moment';
 import { KeysPipe, ReversePipe, HandleError } from '../shared';
 import { ChatDetail } from './chat-models';
 import { ChatService } from './chat.service';
@@ -12,7 +12,7 @@ import { ChatFormComponent } from './chat-detail/chat-form.component';
   templateUrl: './chat-detail.component.html',
   styleUrls: ['./chat-detail.component.scss'],
   directives: [ChatFormComponent],
-  pipes: [ReversePipe, TimeAgoPipe, DateFormatPipe, KeysPipe]
+  pipes: [ReversePipe, DateFormatPipe, KeysPipe]
 })
 
 export class ChatDetailComponent implements OnInit, OnDestroy {
