@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, EventEmitter,
          Output, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { KeysPipe, ReversePipe, HandleError } from '../../shared';
-import { ChatDetail } from './../chat-models';
 import { ChatService } from './../chat.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -29,7 +28,7 @@ export class ChatFormComponent implements OnInit, OnDestroy {
     private service: ChatService) {}
 
   ngOnInit() {
-    if (this.chatDetail.id == 1337) {
+    if (this.chatDetail.id === '1337') {
       this.handleWarning('This room will be used for e2e tests! Carry on.');
     }
   }

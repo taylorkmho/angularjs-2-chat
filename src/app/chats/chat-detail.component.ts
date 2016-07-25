@@ -3,7 +3,6 @@ import { Component, OnInit, OnDestroy, ViewChild,
 import { ActivatedRoute } from '@angular/router';
 import { DateFormatPipe } from 'angular2-moment';
 import { ApiService, KeysPipe, ReversePipe, HandleError } from '../shared';
-import { ChatDetail } from './chat-models';
 import { ChatService } from './chat.service';
 import { ChatFormComponent } from './chat-detail/chat-form.component';
 import { Subscription } from 'rxjs/Subscription';

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChatService } from '../chat.service';
-import { TimeAgoPipe, KeysPipe, HandleError } from '../../shared';
+import { TimeAgoPipe, KeysPipe } from '../../shared';
 import { DateFormatPipe } from 'angular2-moment';
 
 @Component({

@@ -50,7 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.titleSub.unsubscribe();
   }
 
-  backClicked(){
+  backClicked() {
     this.location.back();
   }
 
