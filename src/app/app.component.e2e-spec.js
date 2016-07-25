@@ -1,35 +1,32 @@
 describe('App', function () {
-
   beforeEach(function () {
     browser.get('/');
   });
 
-  it('should have a title', function () {
-    expect(browser.getTitle()).toEqual("Angular 2 App | ng2-webpack");
-  });
-
-  describe('Header', function () {
-    it('should have <header>', function () {
-      expect(element(by.css('my-app header')).isPresent()).toEqual(true);
-    });
-
-    it('should have <nav>', function () {
-      expect(element(by.css('my-app header nav')).isPresent()).toEqual(true);
-    });
-  });
-  describe('Main', function () {
-
-    it('should have <main>', function () {
-      expect(element(by.css('my-app main')).isPresent()).toEqual(true);
-    });
-
-    it('should have a main title', function () {
-      expect(element(by.css('main .title')).getText()).toEqual('Hello from Angular 2!');
+  describe('Document', function () {
+    it('should have a document title', function () {
+      expect(browser.getTitle()).toEqual("Chat");
     });
   });
 
-  it('should have <footer>', function () {
-    expect(element(by.css('my-app footer')).getText()).toEqual("Webpack Angular 2 Starter");
+  describe('Structure', function () {
+    describe('Header', function () {
+      it('should have <header>', function () {
+        expect(element(by.css('my-app header')).isPresent()).toEqual(true);
+      });
+      it('should have back button', function () {
+        expect(element(by.css('my-app button')).isPresent()).toEqual(true);
+      });
+      it('should have title', function () {
+        expect(element(by.css('my-app header h1')).isPresent()).toEqual(true);
+      });
+    });
+
+    describe('Main', function () {
+      it('should have <main>', function () {
+        expect(element(by.css('my-app main')).isPresent()).toEqual(true);
+      });
+    });
   });
 
 });

@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class ChatFormComponent implements OnInit, OnDestroy {
   @ViewChild('text') myTextInput: ElementRef;
   @ViewChild('loaderBar') myLoaderBar: ElementRef;
-  @Input('chatDetail') chatDetail: ChatDetail[];
+  @Input('chatDetail') chatDetail;
   @Output() onMessageSent = new EventEmitter<boolean>();
   private showWarning: boolean = false;
   private isImage: boolean = false;
@@ -29,6 +29,9 @@ export class ChatFormComponent implements OnInit, OnDestroy {
     private service: ChatService) {}
 
   ngOnInit() {
+    if (this.chatDetail.id == 1337) {
+      this.handleWarning('This room will be used for e2e tests! Carry on.');
+    }
   }
 
   // TODO: store textMessage in localStorage onDestroy
