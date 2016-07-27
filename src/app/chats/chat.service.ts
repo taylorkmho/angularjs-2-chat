@@ -32,7 +32,7 @@ export class ChatService {
 
   public postMessage(chatDetail: any, type: string, content: any) {
     let newMessage = {
-      'authorID': '0',
+      'userID': '0',
       'type': type,
       'content': content,
       'sentAt': moment()
