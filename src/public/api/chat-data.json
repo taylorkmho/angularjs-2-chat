@@ -292,12 +292,6 @@
           {
             "userID":"1337",
             "type":"text",
-            "content":"<span class='bottle-iter'>100000</span> bottles of beer on the wall...",
-            "sentAt":"2015-04-25T00:55:53.983Z"
-          },
-          {
-            "userID":"1337",
-            "type":"text",
             "content":"This room will be used for e2e tests! Carry on.",
             "sentAt":"2015-04-20T01:40:21.196-0700"
           }

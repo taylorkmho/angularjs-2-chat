@@ -15,6 +15,7 @@ bootstrap(AppComponent, [
     // These are dependencies of our App
     HTTP_PROVIDERS,
     APP_ROUTER_PROVIDERS,
-    [disableDeprecatedForms(), provideForms()]
+    disableDeprecatedForms(),
+    provideForms()
   ])
   .catch(err => HandleError(err));

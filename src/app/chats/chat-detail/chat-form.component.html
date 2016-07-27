@@ -1,7 +1,7 @@
-<div class="warning-message" #loaderBar [class.is-visible]="showWarning" (click)="handleWarning(false)"></div>
-<form (ngSubmit)="addMessage(message)" #chatForm="ngForm">
+<div class="warning-message" #warning [class.is-visible]="showWarning" (click)="handleWarning(false)"></div>
+<form (ngSubmit)="addMessage(text.value)" #chatForm="ngForm">
   <fieldset name="text-input" [class.is-image]="isImage">
-    <input #text [(ngModel)]="message" [(placeholder)]="placeholder" (keyup)="onKeyUp($event)" type="text" name="text" />
+    <input #text [placeholder]="placeholder" type="text" name="text" />
     <label for="is-image"><img src="/img/icon-photo.svg" /></label>
     <input (change)="setToImage($event)" id="is-image" name="is-image" type="checkbox" />
   </fieldset>

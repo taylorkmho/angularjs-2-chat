@@ -13,14 +13,13 @@ import { Subscription } from 'rxjs/Subscription';
 })
 
 export class ChatFormComponent implements OnInit, OnDestroy {
-  @ViewChild('text') myTextInput: ElementRef;
-  @ViewChild('loaderBar') myLoaderBar: ElementRef;
+  @ViewChild('text') textEl: ElementRef;
+  @ViewChild('warning') warningEl: ElementRef;
   @Input('chatDetail') chatDetail;
   @Output() onMessageSent = new EventEmitter<boolean>();
   private showWarning: boolean = false;
   private isImage: boolean = false;
   private placeholder: string = 'Write a message';
-  private message = '';
   private sub: Subscription;
 
   constructor(
@@ -43,47 +42,41 @@ export class ChatFormComponent implements OnInit, OnDestroy {
   handleWarning(warning: any) {
     if (warning) {
       this.showWarning = true;
-      this.myLoaderBar.nativeElement.innerHTML = warning;
+      this.warningEl.nativeElement.innerHTML = warning;
     } else {
       this.showWarning = false;
+      this.textEl.nativeElement.focus();
     }
   }
 
   addMessage(message: string) {
-    if (this.message === '') {
+    this.handleWarning(false);
+    if (message === '') {
       return;
-    } else if (this.isImage && !/([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/i.test(this.message)) {
-      this.handleWarning('Oops, that doesn&rsquo;t look like a valid URL. Please try again.');
+    } else if (this.isImage && !/([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/i.test(message)) {
+      this.handleWarning('Oops, that doesn&rsquo;t look like a valid image URL. Please try again.');
       return;
     }
+
     let messageType = this.isImage ? 'image' : 'text';
-    this.sub = this.service.postMessage(this.chatDetail, messageType, this.message)
+    this.sub = this.service.postMessage(this.chatDetail, messageType, message)
       .subscribe(
         resolve => {
           this.onMessageSent.emit(resolve);
+          this.textEl.nativeElement.value = '';
+          this.textEl.nativeElement.focus();
         },
         error => {
           this.handleWarning('Ahh, something went wrong there. Please try again.');
           HandleError(error);
         }
       );
-    this.message = '';
-    this.myTextInput.nativeElement.focus();
-  }
-
-  onKeyUp(value: KeyboardEvent) {
-    let inputValue = this.myTextInput.nativeElement.value;
-    if (value.key !== 'Enter') {
-      this.message = inputValue;
-    } else {
-      this.addMessage(this.message);
-    }
   }
 
   setToImage(e) {
     let value = e.target.checked;
     this.isImage = value;
-    this.myTextInput.nativeElement.focus();
+    this.textEl.nativeElement.focus();
     if (value) {
       this.placeholder = 'Paste an image URL';
     } else {

@@ -55,7 +55,7 @@ export class ChatDetailComponent implements OnInit, OnDestroy {
     this.chatDetailSub = this.chatService.getChatDetail(this.chatID)
       .subscribe(
         chatDetail => {
-          let title = chatDetail.users.length > 1 ? 'GROUP' : chatDetail.users[0].name;
+          let title = chatDetail.users.length > 1 ? 'GROUP (' + chatDetail.users.length + ')' : chatDetail.users[0].name;
           this.apiService.setTitle(title);
 
           this.chatDetail = chatDetail;
