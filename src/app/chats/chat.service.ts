@@ -12,25 +12,25 @@ export class ChatService {
 
   constructor(private http: Http) {}
 
-  getChatLists(): Observable<any> {
+  public getChatLists(): Observable<any> {
     return this.http.get(this.apiChatList + '?sortBy=lastUpdated&order=desc')
-      .map( response => response.json() as ChatDetail[] );
+      .map( response => response.json() as ChatDetail[] )
+      .catch( this.handleError );
   }
 
-  getChatDetail(id: string): Observable<any> {
+  public getChatDetail(id: string): Observable<any> {
     return this.http.get(this.apiChatList)
-      .map( response => {
-        return response.json()
-          .find(chatDetail => chatDetail.id === id);
-      });
+      .map( response => response.json().find(chatDetail => chatDetail.id === id) )
+      .catch( this.handleError );
   }
 
-  getUsers(): Observable<any> {
+  public getUsers(): Observable<any> {
     return this.http.get(this.apiUsers)
-      .map( response => response.json() );
+      .map( response => response.json() )
+      .catch( this.handleError );
   }
 
-  postMessage(chatDetail: any, type: string, content: any) {
+  public postMessage(chatDetail: any, type: string, content: any) {
     let newMessage = {
       'authorID': '0',
       'type': type,
@@ -49,4 +49,11 @@ export class ChatService {
         options
       ).map(response => response.json() );
   }
+
+  private handleError (error: any) {
+    let errMsg = (error.message) ? error.message :
+      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    return Observable.throw(errMsg);
+  }
+
 }

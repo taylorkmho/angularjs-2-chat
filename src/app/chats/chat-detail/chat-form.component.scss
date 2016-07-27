@@ -98,7 +98,7 @@ input[type="checkbox"] {
   width: calc(100% - #{$l-gutter*2});
   background-color: rgba($c-primary, .9);
   border-radius: 8px;
-  text-align: center;
+  text-align: left;
   font-size: .85rem;
   pointer-events: none;
   opacity: 0;

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChatService } from './chat.service';
 import { ChatPreviewComponent } from './chat-list';
-import { ApiService, TimeAgoPipe, ReversePipe, KeysPipe, HandleError } from '../shared';
+import { ApiService, TimeAgoPipe, ReversePipe, KeysPipe } from '../shared';
 import { DateFormatPipe } from 'angular2-moment';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -30,12 +30,15 @@ export class ChatListComponent implements OnInit, OnDestroy {
     this.sub = this.chatService.getChatLists()
       .subscribe(
         chatList => this.chatList = chatList,
-        error => HandleError(error)
+        error => {
+          this.apiService.sendError('Uh oh, something went wrong. Try again later!', error);
+        }
       );
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+    this.apiService.sendError(false);
   }
 
   onSelect(chatDetail) {

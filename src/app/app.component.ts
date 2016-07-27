@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 
-import { ApiService, HandleError } from './shared';
+import { ApiService } from './shared';
 import { ChatService } from './chats/chat.service';
 
 import '../style/app.scss';
@@ -22,10 +22,14 @@ import '../style/app.scss';
 })
 
 export class AppComponent implements OnInit, OnDestroy {
-  title: string;
-  displayBackButton: boolean = false;
-  titleSub: Subscription;
-  backButtonSub: Subscription;
+  @ViewChild('error') errorEl: ElementRef;
+  private title: string;
+  private errorVisible: boolean = false;
+  private errorMessage: string;
+  private backButtonVisible: boolean = false;
+  private titleSub: Subscription;
+  private backButtonSub: Subscription;
+  private errorSub: Subscription;
 
   constructor(
     private apiService: ApiService,
@@ -36,13 +40,26 @@ export class AppComponent implements OnInit, OnDestroy {
     this.titleSub = this.apiService.newTitleSet$
       .subscribe(
         title => this.title = title,
-        error => HandleError(error)
+        error => this.handleSubError(error)
       );
 
     this.backButtonSub = this.apiService.backButtonSet$
       .subscribe(
-        display => this.displayBackButton = display,
-        error => HandleError(error)
+        display => this.backButtonVisible = display,
+        error => this.handleSubError(error)
+      );
+
+    this.errorSub = this.apiService.errorSent$
+      .subscribe(
+        message => {
+          if (message) {
+            this.errorVisible = true;
+            this.errorMessage = message;
+          } else {
+            this.errorVisible = false;
+          }
+        },
+        error => this.handleSubError(error)
       );
   }
 
@@ -50,8 +67,16 @@ export class AppComponent implements OnInit, OnDestroy {
     this.titleSub.unsubscribe();
   }
 
-  backClicked() {
+  private goBack() {
     this.location.back();
+  }
+
+  private hideError(): void {
+    this.errorVisible = false;
+  }
+
+  private handleSubError (error: any) {
+    console.error(error);
   }
 
 }

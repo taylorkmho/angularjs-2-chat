@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, EventEmitter,
          Output, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { KeysPipe, ReversePipe, HandleError } from '../../shared';
+import { ApiService, KeysPipe, ReversePipe } from '../../shared';
 import { ChatService } from './../chat.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -17,19 +17,17 @@ export class ChatFormComponent implements OnInit, OnDestroy {
   @ViewChild('warning') warningEl: ElementRef;
   @Input('chatDetail') chatDetail;
   @Output() onMessageSent = new EventEmitter<boolean>();
-  private showWarning: boolean = false;
+  private warningVisible: boolean = false;
   private isImage: boolean = false;
   private placeholder: string = 'Write a message';
   private sub: Subscription;
 
   constructor(
     private route: ActivatedRoute,
-    private service: ChatService) {}
+    private service: ChatService,
+    private apiService: ApiService) {}
 
   ngOnInit() {
-    if (this.chatDetail.id === '1337') {
-      this.handleWarning('This room will be used for e2e tests! Carry on.');
-    }
   }
 
   // TODO: store textMessage in localStorage onDestroy
@@ -39,22 +37,22 @@ export class ChatFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  handleWarning(warning: any) {
+  showWarning(warning: any): void {
     if (warning) {
-      this.showWarning = true;
+      this.warningVisible = true;
       this.warningEl.nativeElement.innerHTML = warning;
     } else {
-      this.showWarning = false;
+      this.warningVisible = false;
       this.textEl.nativeElement.focus();
     }
   }
 
-  addMessage(message: string) {
-    this.handleWarning(false);
+  addMessage(message: string): void {
+    this.showWarning(false);
     if (message === '') {
       return;
     } else if (this.isImage && !/([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/i.test(message)) {
-      this.handleWarning('Oops, that doesn&rsquo;t look like a valid image URL. Please try again.');
+      this.showWarning('Oops, that doesn&rsquo;t look like a valid image URL. Please try again.');
       return;
     }
 
@@ -67,13 +65,12 @@ export class ChatFormComponent implements OnInit, OnDestroy {
           this.textEl.nativeElement.focus();
         },
         error => {
-          this.handleWarning('Ahh, something went wrong there. Please try again.');
-          HandleError(error);
+          this.apiService.sendError('Oops, something went wrong. Please try later.', error);
         }
       );
   }
 
-  setToImage(e) {
+  setToImage(e): void {
     let value = e.target.checked;
     this.isImage = value;
     this.textEl.nativeElement.focus();

@@ -4,7 +4,6 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { AppComponent } from './app/app.component';
 import { APP_ROUTER_PROVIDERS } from './app/app.routes';
-import { HandleError } from './app/shared';
 
 // depending on the env mode, enable prod mode or add debugging modules
 if (process.env.ENV === 'build') {
@@ -18,4 +17,3 @@ bootstrap(AppComponent, [
     disableDeprecatedForms(),
     provideForms()
   ])
-  .catch(err => HandleError(err));

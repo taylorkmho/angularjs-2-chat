@@ -1,4 +1,4 @@
-<div class="warning-message" #warning [class.is-visible]="showWarning" (click)="handleWarning(false)"></div>
+<div class="warning-message" #warning [class.is-visible]="warningVisible" (click)="showWarning(false)"></div>
 <form (ngSubmit)="addMessage(text.value)" #chatForm="ngForm">
   <fieldset name="text-input" [class.is-image]="isImage">
     <input #text [placeholder]="placeholder" type="text" name="text" />
