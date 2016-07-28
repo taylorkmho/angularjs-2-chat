@@ -42,7 +42,7 @@ export class ChatListComponent implements OnInit, OnDestroy {
   }
 
   onSelect(chatDetail) {
-    this.router.navigate(['/chat-list', chatDetail.id]);
+    this.router.navigate([chatDetail.id]);
   }
 
 }

@@ -4,9 +4,8 @@ import { ChatListComponent } from './chats/chat-list.component';
 import { ChatDetailComponent } from './chats/chat-detail.component';
 
 export const routes: RouterConfig = [
-  { path: 'chat-list',  component: ChatListComponent },
-  { path: 'chat-list/:id', component: ChatDetailComponent },
-  { path: '', redirectTo: 'chat-list', pathMatch: 'full' }
+  { path: '',  component: ChatListComponent },
+  { path: ':id', component: ChatDetailComponent }
 ];
 
 export const APP_ROUTER_PROVIDERS = [
