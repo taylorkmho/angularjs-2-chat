@@ -2,7 +2,7 @@
 <form (ngSubmit)="addMessage(text.value)" #chatForm="ngForm">
   <fieldset name="text-input" [class.is-image]="isImage">
     <input #text [placeholder]="placeholder" type="text" name="text" />
-    <label for="is-image"><img src="/img/icon-photo.svg" /></label>
+    <label for="is-image"><img src="img/icon-photo.svg" /></label>
     <input (change)="setToImage($event)" id="is-image" name="is-image" type="checkbox" />
   </fieldset>
   <input type="submit" value="SEND" />

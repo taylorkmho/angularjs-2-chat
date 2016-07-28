@@ -1,7 +1,7 @@
 <div *ngIf="chatDetail" class="chat-detail">
   <ul #scrollMe class="chat-detail__thread">
     <li class="message" *ngFor="let message of chatDetail.messageThread | myReverse; let messageIndex = index" [class.message--right]="message.userID === '0'">
-      <aside class="message__avatar" [ngStyle]="{'background-image': 'url(/img/avatar/' + message.userID + '.jpg)'}"></aside>
+      <aside class="message__avatar" [ngStyle]="{'background-image': 'url(img/avatar/' + message.userID + '.jpg)'}"></aside>
       <main>
         <figure>
           <p *ngIf="message.type === 'text'" class="message__text" [innerHTML]="message.content"></p>

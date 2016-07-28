@@ -47,6 +47,9 @@ Thumbs.db
 __build__/**
 .webpack.json
 
+# Portfolio gist #
+/gist
+
 # Doc #
 /doc/
 

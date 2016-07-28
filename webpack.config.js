@@ -16,6 +16,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ENV = process.env.npm_lifecycle_event;
 var isTest = ENV === 'test' || ENV === 'test-watch';
 var isProd = ENV === 'build';
+var isGist = ENV === 'gist';
 
 module.exports = function makeWebpackConfig() {
   /**
@@ -30,14 +31,14 @@ module.exports = function makeWebpackConfig() {
    * Reference: http://webpack.github.io/docs/configuration.html#devtool
    * Type of sourcemap to use per build type
    */
-  if (isProd) {
+  if (isProd || isGist) {
     config.devtool = 'source-map';
   } else {
     config.devtool = 'eval-source-map';
   }
 
   // add debug messages
-  config.debug = !isProd || !isTest;
+  config.debug = !isProd || !isTest || !isGist;
 
   /**
    * Entry
@@ -53,12 +54,30 @@ module.exports = function makeWebpackConfig() {
    * Output
    * Reference: http://webpack.github.io/docs/configuration.html#output
    */
-  config.output = isTest ? {} : {
-    path: root('dist'),
-    publicPath: isProd ? '/' : 'http://localhost:8080/',
-    filename: isProd ? 'js/[name].[hash].js' : 'js/[name].js',
-    chunkFilename: isProd ? '[id].[hash].chunk.js' : '[id].chunk.js'
-  };
+  function getFilePaths() {
+    if (isProd) {
+      return {
+        path: root('dist'),
+        publicPath: '/',
+        filename: 'js/[name].[hash].js',
+        chunkFilename: '[id].[hash].chunk.js'
+      }
+    } else if (isGist) {
+      return {
+        path: root('gist'),
+        publicPath: 'http://taylorkmho.com/gists/angularjs-2-chat/',
+        filename: 'js/[name].js',
+        chunkFilename: '[id].chunk.js'
+      }
+    } else {
+      return {
+        publicPath: 'http://localhost:8080/',
+        filename: 'js/[name].js',
+        chunkFilename: '[id].chunk.js'
+      }
+    }
+  }
+  config.output = isTest ? {} : getFilePaths();
 
   /**
    * Resolve
@@ -181,12 +200,12 @@ module.exports = function makeWebpackConfig() {
       // Extract css files
       // Reference: https://github.com/webpack/extract-text-webpack-plugin
       // Disabled when in test mode or not in build mode
-      new ExtractTextPlugin('css/[name].[hash].css', {disable: !isProd})
+      new ExtractTextPlugin('css/[name].[hash].css', {disable: !isProd || !isGist})
     );
   }
 
   // Add build specific plugins
-  if (isProd) {
+  if (isProd || isGist) {
     config.plugins.push(
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
       // Only emit files when there are no errors

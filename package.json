@@ -20,7 +20,8 @@
     "ci": "npm run e2e && npm run test",
     "docs": "typedoc --options typedoc.json src/app/app.component.ts",
     "start": "npm run server",
-    "postinstall": "npm run webdriver-update && typings install"
+    "postinstall": "npm run webdriver-update && typings install",
+    "gist": "rimraf gist && webpack --progress --profile --bail && replace 'href=\"/\"' 'href=\"/gists/angularjs-2-chat/\"' gist/index.html"
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.4",
@@ -69,6 +70,7 @@
     "protractor": "^3.1.1",
     "raw-loader": "0.5.1",
     "remap-istanbul": "^0.6.4",
+    "replace": "^0.3.0",
     "rimraf": "^2.5.1",
     "sass-loader": "^3.1.2",
     "shelljs": "^0.7.0",
