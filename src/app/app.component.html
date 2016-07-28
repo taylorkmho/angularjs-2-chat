@@ -3,7 +3,7 @@
            add button to "reset" data -->
 
 <header>
-  <button [class.is-visible]="displayBackButton" (click)="backClicked()">
+  <button [class.is-visible]="backButtonVisible" (click)="goBack()">
     <img src="/img/icon-back.svg" />
   </button>
   <h1>
@@ -11,5 +11,6 @@
   </h1>
 </header>
 <main>
+  <div class="error-message" #error [class.is-visible]="errorVisible" (click)="hideError()">{{errorMessage}}</div>
   <router-outlet></router-outlet>
 </main>

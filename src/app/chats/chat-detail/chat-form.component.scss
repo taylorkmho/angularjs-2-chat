@@ -7,36 +7,6 @@
   border-top: 1px solid $c-ui-elements;
 }
 
-.warning-message {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translateY(-100%);
-  width: 100%;
-  background-color: rgba($c-primary, .9);
-  padding: ($l-gutter/2) ($l-gutter*2) ($l-gutter/2) $l-gutter;
-  text-align: center;
-  font-size: .85rem;
-  pointer-events: none;
-  opacity: 0;
-  transition: all 250ms ease-out;
-  cursor: pointer;
-  &.is-visible {
-    opacity: 1;
-    pointer-events: initial;
-  }
-  &:hover {
-    background-color: $c-primary;
-  }
-  &:after {
-    content: "×";
-    position: absolute;
-    top: 50%;
-    right: $l-gutter;
-    transform: translateY(-50%);
-  }
-}
-
 form {
   position: relative;
   display: flex;
@@ -116,4 +86,53 @@ input[type="checkbox"] {
   overflow: hidden;
   position: absolute;
   z-index: -1;
+}
+
+.warning-message {
+  position: absolute;
+  top: -$l-gutter;
+  left: $l-gutter;
+  padding: $l-gutter;
+  padding-right: #{$l-gutter * 2};
+  transform: translateY(-90%);
+  width: calc(100% - #{$l-gutter*2});
+  background-color: rgba($c-primary, .9);
+  border-radius: 8px;
+  text-align: left;
+  font-size: .85rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 250ms ease-out;
+  cursor: pointer;
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: $l-gutter;
+    transform: translateY(100%);
+    width: 0;
+    height: 0;
+    border-left: #{$l-gutter/2} solid transparent;
+    border-right: #{$l-gutter/2} solid transparent;
+    border-top: #{$l-gutter/2} solid rgba($c-primary, .9);
+    transition: border 250ms ease-out;
+  }
+  &:after {
+    content: "×";
+    position: absolute;
+    top: 50%;
+    right: $l-gutter;
+    transform: translateY(-50%);
+  }
+  &.is-visible {
+    transform: translateY(-100%);
+    opacity: 1;
+    pointer-events: initial;
+  }
+  &:hover {
+    background-color: $c-primary;
+    &:before {
+      border-top-color: $c-primary;
+    }
+  }
 }
