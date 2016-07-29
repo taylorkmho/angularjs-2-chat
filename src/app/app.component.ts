@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { HTTP_PROVIDERS } from '@angular/http';
-import { Location } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 
 import { ApiService } from './shared';
@@ -33,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private apiService: ApiService,
-    private location: Location) {
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -68,7 +67,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private goBack() {
-    this.location.back();
+    this.router.navigate(['/']);
   }
 
   private hideError(): void {
